@@ -28,7 +28,13 @@ class TestController
         return $this->indexService->index("test");
     }
 
-    #[GetRoute("id/{id:\d+}")]
+    #[Route]
+    public function mysql(Request $request): string
+    {
+        return $this->indexService->mysql();
+    }
+
+    #[GetRoute("{id:\d+}")]
     public function hello(int $id): string
     {
         return 'hello' . $id;

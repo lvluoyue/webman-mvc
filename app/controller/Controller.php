@@ -15,7 +15,6 @@ class Controller
     #[Inject]
     private IndexService $indexService;
 
-
     #[Route("")]
     public function index(Request $request): string
     {

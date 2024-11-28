@@ -15,18 +15,21 @@
 use support\Log;
 use support\Request;
 use app\process\Http;
+use function Workbunny\WebmanCoroutine\event_loop;
 
 global $argv;
+
+$listen = 'http://' . env('server.app.address', '0.0.0.0') . ':' . env('server.app.prot', 8080);
 
 return [
     'webman' => [
         'handler' => Http::class,
-        'listen' => 'http://0.0.0.0:8787',
+        'listen' => $listen,
         'count' => cpu_count() * 4,
         'user' => '',
         'group' => '',
         'reusePort' => true,
-        'eventLoop' => '',
+        'eventLoop' => event_loop(),
         'context' => [],
         'constructor' => [
             'requestClass' => Request::class,

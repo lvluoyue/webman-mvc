@@ -24,6 +24,6 @@ class IndexControllerTest extends TestCase
     public function testIndex()
     {
 //        print_r(\DI\env("test_abc"));
-        print_r(static::$controller->index());
+        self::assertIsString(static::$controller->index());
     }
 }

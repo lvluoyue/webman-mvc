@@ -6,5 +6,6 @@ use LinFly\Annotation\Annotation\Bean;
 
 #[Bean]
 interface IndexService {
-
+    function index(string $v);
+    function mysql();
 }
