@@ -8,4 +8,5 @@ use LinFly\Annotation\Annotation\Bean;
 interface IndexService {
     function index(string $v);
     function mysql();
+    function php();
 }

@@ -19,6 +19,7 @@ use support\Request;
 class TestController
 {
 
+
     #[Inject]
     private IndexService $indexService;
 

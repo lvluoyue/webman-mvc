@@ -7,5 +7,4 @@
 /tests/tmp
 /tests/.phpunit.result.cache
 /composer.lock
-/LICENSE
 /README.md

@@ -22,10 +22,10 @@ global $argv;
 $listen = 'http://' . env('server.app.address', '0.0.0.0') . ':' . env('server.app.prot', 8080);
 
 return [
-    'webman' => [
+    env('server.app.name', 'webman') => [
         'handler' => Http::class,
         'listen' => $listen,
-        'count' => cpu_count() * 4,
+        'count' => env("server.app.process", cpu_count() * 4),
         'user' => '',
         'group' => '',
         'reusePort' => true,

@@ -15,11 +15,22 @@ class IndexServiceImpl implements IndexService
     public function index(string $v = '')
     {
 //        print_r(Container::get("test.abc"));
-        return $this->abc . $v;
+        return json([
+            'code' => 200,
+            'message' => 'success',
+            'data' => 'Hello World'
+        ]);
     }
 
     public function mysql()
     {
         return Db::connection('mysql')->table("user")->get();
+    }
+
+    function php()
+    {
+        $str = "echo 1;";
+        $str = str_replace("\"", "\\\"", $str);
+        return exec("docker run --rm php php -r \"{$str}\"");
     }
 }
