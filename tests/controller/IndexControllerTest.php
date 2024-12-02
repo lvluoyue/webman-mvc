@@ -13,17 +13,23 @@ class IndexControllerTest extends TestCase
 {
 
     #[Inject]
-    private static IndexService $controller;
+    private IndexService $controller;
 
-    public static function setUpBeforeClass(): void
+    public function __construct(string $name)
     {
-        static::$controller = container::get(IndexService::class);
+        Container::injectOn($this);
+        parent::__construct($name);
     }
 
     #[Test]
     public function testIndex()
     {
-//        print_r(\DI\env("test_abc"));
-        self::assertIsString(static::$controller->index());
+        self::assertIsObject($this->controller->index('index'));
+    }
+
+    #[Test]
+    public function testIndex1()
+    {
+        self::assertIsObject($this->controller->index('index'));
     }
 }

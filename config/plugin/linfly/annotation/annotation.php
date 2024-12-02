@@ -12,7 +12,8 @@ return [
     // 注解扫描路径
     'include_paths' => [
         // 应用目录 支持通配符: * , 例如: app/*, app/*.php
-        'app'
+        'app',
+        'tests'
     ],
     // 扫描排除的路径 支持通配符: *
     'exclude_paths' => [

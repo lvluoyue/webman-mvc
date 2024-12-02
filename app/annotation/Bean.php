@@ -5,7 +5,7 @@ namespace app\annotation;
 use LinFly\Annotation\AbstractAnnotation;
 
 #[\Attribute(\Attribute::TARGET_PARAMETER | \Attribute::TARGET_PROPERTY | \Attribute::TARGET_CLASS_CONSTANT)]
-class Value extends AbstractAnnotation
+class Bean extends AbstractAnnotation
 {
 
     /**

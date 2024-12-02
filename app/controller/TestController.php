@@ -2,7 +2,7 @@
 
 namespace app\controller;
 
-use app\annotation\Value;
+use app\annotation\Bean;
 use app\po\testPO;
 use app\service\IndexService;
 use DI\Attribute\Inject;

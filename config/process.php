@@ -19,13 +19,13 @@ use function Workbunny\WebmanCoroutine\event_loop;
 
 global $argv;
 
-$listen = 'http://' . env('server.app.address', '0.0.0.0') . ':' . env('server.app.prot', 8080);
+$listen = 'http://' . env('SERVER_APP_ADDRESS', '0.0.0.0') . ':' . env('SERVER_APP_PROT', 8080);
 
 return [
-    env('server.app.name', 'webman') => [
+    env('SERVER_APP_NAME', 'webman') => [
         'handler' => Http::class,
         'listen' => $listen,
-        'count' => env("server.app.process", cpu_count() * 4),
+        'count' => env("SERVER_APP_PROCESS", cpu_count() * 4),
         'user' => '',
         'group' => '',
         'reusePort' => true,

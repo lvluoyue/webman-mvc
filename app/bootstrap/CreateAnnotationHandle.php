@@ -4,8 +4,9 @@ namespace app\bootstrap;
 use app\annotation\Component;
 use app\annotation\handle\ComponentHandle;
 use app\annotation\handle\ValueHandle;
-use app\annotation\Value;
+use app\annotation\Bean;
 use LinFly\Annotation\Annotation;
+use LinFly\Annotation\Annotation\Inject;
 use Webman\Bootstrap;
 
 class CreateAnnotationHandle implements Bootstrap
@@ -26,6 +27,6 @@ class CreateAnnotationHandle implements Bootstrap
         // 添加IOC注解类处理器
         Annotation::addHandle(Component::class, ComponentHandle::class);
         // 添加Value注解类处理器
-        Annotation::addHandle(Value::class, ValueHandle::class);
+        Annotation::addHandle(Bean::class, ValueHandle::class);
     }
 }

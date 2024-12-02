@@ -7,6 +7,7 @@ use DI\Attribute\Inject;
 use LinFly\Annotation\Route\NamespaceController;
 use LinFly\Annotation\Route\PostRoute;
 use LinFly\Annotation\Route\Route;
+use support\Db;
 use support\Request;
 use support\Response;
 
@@ -18,9 +19,10 @@ class Controller
     private IndexService $indexService;
 
     #[Route("")]
-    public function index(Request $request): Response
+    public function index(Request $request,#[Inject("TEST_ABCD")] $abc = 0): Response
     {
-        return $this->indexService->index("index");
+        print_r(Db::table('api_call')->get());
+        return $this->indexService->index($abc);
     }
 
     #[PostRoute]
@@ -29,6 +31,6 @@ class Controller
         if($code == null) {
             return "error";
         }
-        return $this->indexService->php();
+        return $this->indexService->php($code);
     }
 }

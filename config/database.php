@@ -14,17 +14,17 @@
 
 return [
     // 默认数据库
-    'default' => env('database.default', 'mysql'),
-
+    'default' => env('DATABASE_DEFAULT', 'mysql'),
+//    'persistent' => false,
     // 各种数据库配置
     'connections' => [
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('database.connections.mysql.host', '127.0.0.1'),
-            'port' => env('database.connections.mysql.port', 3306),
-            'database' => env('database.connections.mysql.database', 'test'),
-            'username' => env('database.connections.mysql.username', 'root'),
-            'password' => env('database.connections.mysql.password', ''),
+            'host' => env('DATABASE_CONNECTIONS_MYSQL_HOST', '127.0.0.1'),
+            'port' => env('DATABASE_CONNECTIONS_MYSQL_PORT', 3306),
+            'database' => env('DATABASE_CONNECTIONS_MYSQL_DATABASE', 'test'),
+            'username' => env('DATABASE_CONNECTIONS_MYSQL_USERNAME', 'root'),
+            'password' => env('DATABASE_CONNECTIONS_MYSQL_PASSWORD', ''),
             'unix_socket' => '',
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
@@ -37,20 +37,20 @@ return [
         ],
         'pgsql' => [
             'driver' => 'pgsql',
-            'host' => env('database.connections.pgsql.host', '127.0.0.1'),
-            'port' => env('database.connections.pgsql.port', 5432),
-            'database' => env('database.connections.pgsql.database', 'test'),
-            'username' => env('database.connections.pgsql.username', 'root'),
-            'password' => env('database.connections.pgsql.password', ''),
+            'host' => env('DATABASE_CONNECTIONS_PGSQL_HOST', '127.0.0.1'),
+            'port' => env('DATABASE_CONNECTIONS_PGSQL_PORT', 5432),
+            'database' => env('DATABASE_CONNECTIONS_PGSQL_DATABASE', 'test'),
+            'username' => env('DATABASE_CONNECTIONS_PGSQL_USERNAME', 'root'),
+            'password' => env('DATABASE_CONNECTIONS_PGSQL_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
-            'schema' => env('database.connections.pgsql.schema', 'public'),
+            'schema' => env('DATABASE_CONNECTIONS_PGSQL_SCHEMA', 'public'),
             'sslmode' => 'prefer',
-            'application_name' => env('APP_NAME', 'API-Server'),
+            'application_name' => env('SERVER_APP_NAME', 'webman'),
         ],
         'sqlite' => [
             'driver' => 'sqlite',
-            'database' => base_path(false) . env('SQLITE_PATH', '/database.sqlite'),
+            'database' => base_path(false) . env('DATABASE_CONNECTIONS_SQLITE_PATH', '/database.sqlite'),
             'prefix' => '',
         ],
     ],

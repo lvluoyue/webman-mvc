@@ -12,7 +12,7 @@ class ComponentHandle implements IAnnotationHandle
     {
         $ref = new ReflectionClass($item['class']);
         foreach ($ref->getInterfaces() as $interface) {
-            Container::set($interface->name, \DI\autowire($item['class']));
+            Container::set($interface->name, \DI\get($item['class']));
         }
     }
 }

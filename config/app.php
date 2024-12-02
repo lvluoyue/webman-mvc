@@ -15,12 +15,12 @@
 use support\Request;
 
 return [
-    'debug' => env('server.app.debug', true),
+    'debug' => env('SERVER_APP_DEBUG', true),
     'error_reporting' => E_ALL,
-    'default_timezone' => env('server.app.timezone', 'Asia/Shanghai'),
+    'default_timezone' => env('SERVER_APP_TIMEZONE', 'Asia/Shanghai'),
     'request_class' => Request::class,
     'public_path' => base_path() . DIRECTORY_SEPARATOR . 'public',
     'runtime_path' => base_path(false) . DIRECTORY_SEPARATOR . 'runtime',
-    'controller_suffix' => env('server.app.controller.suffix', 'Controller'),
-    'controller_reuse' => env('server.app.controller.reuse', true),
+    'controller_suffix' => env('SERVER_APP_CONTROLLER_SUFFIX', 'Controller'),
+    'controller_reuse' => env('SERVER_APP_CONTROLLER_REUSE', true),
 ];
