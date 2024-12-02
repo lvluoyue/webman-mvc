@@ -21,7 +21,6 @@ class Controller
     #[Route("")]
     public function index(Request $request,#[Inject("TEST_ABCD")] $abc = 0): Response
     {
-        print_r(Db::table('api_call')->get());
         return $this->indexService->index($abc);
     }
 
