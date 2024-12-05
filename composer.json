@@ -38,7 +38,7 @@
     "laravel/serializable-closure": "^1.3",
     "illuminate/redis": "^11.33",
     "workbunny/webman-coroutine": "^1.3",
-    "linfly/annotation": "1.x",
+    "linfly/annotation": "^2.0.1-beta.5",
     "ocramius/proxy-manager": "^1.0",
     "php-di/php-di": "^7.0"
   },

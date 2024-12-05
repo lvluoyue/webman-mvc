@@ -4,32 +4,33 @@ namespace app\controller;
 
 use app\service\IndexService;
 use DI\Attribute\Inject;
-use LinFly\Annotation\Route\NamespaceController;
-use LinFly\Annotation\Route\PostRoute;
-use LinFly\Annotation\Route\Route;
-use support\Db;
+use LinFly\Annotation\Attributes\Route\NamespaceController;
+use LinFly\Annotation\Attributes\Route\PostMapping;
+use LinFly\Annotation\Attributes\Route\RequestMapping;
 use support\Request;
 use support\Response;
 
 #[NamespaceController(namespace: __NAMESPACE__)]
 class Controller
 {
-
     #[Inject]
-    private IndexService $indexService;
+    private readonly IndexService $indexService;
 
-    #[Route("")]
-    public function index(Request $request,#[Inject("TEST_ABCD")] $abc = 0): Response
+    #[RequestMapping("")]
+    public function index(Request $request,#[Inject("TEST_ABCD")] $abc): Response
     {
         return $this->indexService->index($abc);
     }
 
-    #[PostRoute]
-    public function php(Request $request, string $code)
+    #[PostMapping]
+    public function php(Request $request, string $code): Response
     {
-        if($code == null) {
-            return "error";
-        }
         return $this->indexService->php($code);
+    }
+
+    #[PostMapping]
+    public function java(Request $request, string $code, string $input): Response
+    {
+        return $this->indexService->java($code, $input);
     }
 }

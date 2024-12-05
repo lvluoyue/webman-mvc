@@ -21,4 +21,7 @@ $builder = new \DI\ContainerBuilder();
 $builder->addDefinitions(config('dependence', []));
 $builder->useAttributes(true);
 $builder->useAutowiring(true);
+if(!env("SERVER_APP_DEBUG", true)) {
+    $builder->enableCompilation(runtime_path('/cache/container'));
+}
 return $builder->build();

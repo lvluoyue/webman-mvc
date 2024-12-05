@@ -13,10 +13,35 @@ use support\exception\BusinessException;
 use support\exception\InputTypeException;
 use support\exception\MissingInputException;
 use Webman\App;
+use Webman\Context;
 use Webman\Http\Request;
 
 class Http extends App
 {
+    /**
+     * OnMessage.
+     * @param TcpConnection|mixed $connection
+     * @param Request|mixed $request
+     * @return null
+     * @throws Throwable
+     */
+    public function onMessage($connection, $request)
+    {
+        parent::onMessage($connection, $request);
+    }
+    /**
+     * Send.
+     * @param TcpConnection|mixed $connection
+     * @param mixed|Response $response
+     * @param Request|mixed $request
+     * @return void
+     */
+    protected static function send($connection, $response, $request)
+    {
+//        print_r(Context::get());
+        parent::send($connection, $response, $request);
+    }
+
     /**
      * Check whether inject is required.
      * @param $call

@@ -11,5 +11,13 @@
  * @link      http://www.workerman.net/
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
+$dependencies = [...$_ENV];
+$compoents = getAnnotation(\app\annotation\Component::class);
 
-return $_ENV;
+/** @var \ReflectionClass $reflectionClass */
+foreach ($compoents as $reflectionClass) {
+    foreach ($reflectionClass->getInterfaces() as $interface) {
+        $dependencies[$interface->name] = \DI\get($reflectionClass->name);
+    }
+}
+return $dependencies;

@@ -14,6 +14,5 @@
 
 return [
     support\bootstrap\Session::class,
-    support\bootstrap\LaravelDb::class,
-    app\bootstrap\CreateAnnotationHandle::class,
+    support\bootstrap\LaravelDb::class
 ];

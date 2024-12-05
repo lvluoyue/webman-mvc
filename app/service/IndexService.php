@@ -2,10 +2,14 @@
 
 namespace app\service;
 
-use LinFly\Annotation\Annotation\Bean;
+use support\Response;
 
 interface IndexService {
-    function index(string $v);
-    function mysql();
-    function php(string $str);
+    function index(string $v): Response;
+
+    function mysql(): Response;
+
+    function php(string $str): Response;
+
+    function java(string $code, string $input): Response;
 }

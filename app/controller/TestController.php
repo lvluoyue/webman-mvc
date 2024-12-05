@@ -2,61 +2,48 @@
 
 namespace app\controller;
 
-use app\annotation\Bean;
-use app\po\testPO;
 use app\service\IndexService;
 use DI\Attribute\Inject;
-use LinFly\Annotation\Route\GetRoute;
-use LinFly\Annotation\Route\Middleware;
-use LinFly\Annotation\Route\NamespaceController;
-use LinFly\Annotation\Route\Controller;
-use LinFly\Annotation\Route\PostRoute;
-use LinFly\Annotation\Route\Route;
+use LinFly\Annotation\Attributes\Route\GetMapping;
+use LinFly\Annotation\Attributes\Route\NamespaceController;
+use LinFly\Annotation\Attributes\Route\RequestMapping;
 use support\Request;
+use support\Response;
 
 //#[Controller("/test")]
 #[NamespaceController(namespace: __NAMESPACE__)]
 class TestController
 {
 
-
     #[Inject]
-    private IndexService $indexService;
+    private readonly IndexService $indexService;
 
-    #[Route("")]
-    public function index(Request $request): string
+    #[RequestMapping("")]
+    public function index(Request $request): Response
     {
         return $this->indexService->index("test");
     }
 
-    #[Route]
-    public function mysql(Request $request): string
+    #[GetMapping]
+    public function mysql(Request $request): Response
     {
         return $this->indexService->mysql();
     }
 
-    #[GetRoute("{id:\d+}")]
+    #[GetMapping("{id:\d+}")]
     public function hello(int $id): string
     {
         return 'hello' . $id;
     }
 
-    #[PostRoute("test/{id:\d+}")]
-    public function post(int $id, testPO $testPO)
-    {
-        return json(["id" => $id,
-            ...$testPO->get()
-        ]);
-    }
-
-    #[Route]
-    public function view(Request $request)
+    #[RequestMapping]
+    public function view(Request $request): Response
     {
         return view('index/view', ['name' => 'webman']);
     }
 
-    #[Route]
-    public function json(Request $request)
+    #[RequestMapping]
+    public function json(Request $request): Response
     {
         return json(['code' => 0, 'msg' => 'ok']);
     }

@@ -2,10 +2,9 @@
 
 namespace app\annotation;
 
-use LinFly\Annotation\AbstractAnnotation;
 
 #[\Attribute(\Attribute::TARGET_PARAMETER | \Attribute::TARGET_PROPERTY | \Attribute::TARGET_CLASS_CONSTANT)]
-class Bean extends AbstractAnnotation
+class Bean
 {
 
     /**
@@ -14,6 +13,5 @@ class Bean extends AbstractAnnotation
      */
     public function __construct(public string|array $controller = '')
     {
-        $this->paresArgs(func_get_args(), 'controller');
     }
 }

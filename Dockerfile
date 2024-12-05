@@ -13,8 +13,6 @@ RUN docker-php-ext-install pcntl pdo_mysql pdo_pgsql sockets zip bz2 gd
 RUN pecl install redis
 RUN pecl install -D 'enable-openssl="yes" enable-swoole-curl="yes" enable-http2="yes" enable-swoole-thread="yes"' swoole
 
-#RUN echo "extension=swoole.so" >> /usr/local/etc/php/php.ini
-
 # 设置挂载点
 VOLUME ["/opt"]
 
