@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="webman本地运行" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/windows.php" scriptParameters="-d extension=swow">
+    <method v="2" />
+  </configuration>
+</component>

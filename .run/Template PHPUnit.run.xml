@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+    <TestRunner bootstrap_file="$PROJECT_DIR$/support/bootstrap.php" configuration_file="$PROJECT_DIR$/phpunit.xml" coverage_engine="PHPDBG" use_alternative_configuration_file="true" />
+    <method v="2" />
+  </configuration>
+</component>

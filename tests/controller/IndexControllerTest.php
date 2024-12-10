@@ -22,7 +22,6 @@ class IndexControllerTest extends TestCase
         parent::__construct($name);
     }
 
-    #[Test]
     #[TestDox("测试 IndexController::index 方法")]
     public function testIndex()
     {

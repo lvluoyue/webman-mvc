@@ -13,7 +13,6 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-use app\annotation\Component;
 use support\Container;
 use support\Request;
 use support\Response;
@@ -77,7 +76,7 @@ function app_path(string $path = ''): string
  * @param string|null $plugin
  * @return string
  */
-function public_path(string $path = '', string $plugin = null): string
+function public_path(string $path = '', ?string $plugin = null): string
 {
     static $publicPaths = [];
     $plugin = $plugin ?? '';
@@ -204,7 +203,7 @@ function redirect(string $location, int $status = 302, array $headers = []): Res
  * @param string|null $plugin
  * @return Response
  */
-function view($template = null, array $vars = [], string $app = null, string $plugin = null): Response
+function view(mixed $template = null, array $vars = [], ?string $app = null, ?string $plugin = null): Response
 {
     [$template, $vars, $app, $plugin] = template_inputs($template, $vars, $app, $plugin);
     $handler = \config($plugin ? "plugin.$plugin.view.handler" : 'view.handler');
@@ -220,7 +219,7 @@ function view($template = null, array $vars = [], string $app = null, string $pl
  * @return Response
  * @throws Throwable
  */
-function raw_view($template = null, array $vars = [], string $app = null, string $plugin = null): Response
+function raw_view(mixed $template = null, array $vars = [], ?string $app = null, ?string $plugin = null): Response
 {
     return new Response(200, [], Raw::render(...template_inputs($template, $vars, $app, $plugin)));
 }
@@ -233,7 +232,7 @@ function raw_view($template = null, array $vars = [], string $app = null, string
  * @param string|null $plugin
  * @return Response
  */
-function blade_view($template = null, array $vars = [], string $app = null, string $plugin = null): Response
+function blade_view(mixed $template = null, array $vars = [], ?string $app = null, ?string $plugin = null): Response
 {
     return new Response(200, [], Blade::render(...template_inputs($template, $vars, $app, $plugin)));
 }
@@ -246,7 +245,7 @@ function blade_view($template = null, array $vars = [], string $app = null, stri
  * @param string|null $plugin
  * @return Response
  */
-function think_view($template = null, array $vars = [], string $app = null, string $plugin = null): Response
+function think_view(mixed $template = null, array $vars = [], ?string $app = null, ?string $plugin = null): Response
 {
     return new Response(200, [], ThinkPHP::render(...template_inputs($template, $vars, $app, $plugin)));
 }
@@ -259,7 +258,7 @@ function think_view($template = null, array $vars = [], string $app = null, stri
  * @param string|null $plugin
  * @return Response
  */
-function twig_view($template = null, array $vars = [], string $app = null, string $plugin = null): Response
+function twig_view(mixed $template = null, array $vars = [], ?string $app = null, ?string $plugin = null): Response
 {
     return new Response(200, [], Twig::render(...template_inputs($template, $vars, $app, $plugin)));
 }
@@ -276,10 +275,10 @@ function request()
 /**
  * Get config
  * @param string|null $key
- * @param $default
- * @return array|mixed|null
+ * @param mixed $default
+ * @return mixed
  */
-function config(string $key = null, $default = null)
+function config(?string $key = null, mixed $default = null)
 {
     return Config::get($key, $default);
 }
@@ -310,12 +309,12 @@ function route(string $name, ...$parameters): string
 
 /**
  * Session
- * @param mixed $key
+ * @param array|string|null $key
  * @param mixed $default
  * @return mixed|bool|Session
  * @throws Exception
  */
-function session($key = null, $default = null)
+function session(array|string|null $key = null, mixed $default = null): mixed
 {
     $session = \request()->session();
     if (null === $key) {
@@ -347,7 +346,7 @@ function session($key = null, $default = null)
  * @param string|null $locale
  * @return string
  */
-function trans(string $id, array $parameters = [], string $domain = null, string $locale = null): string
+function trans(string $id, array $parameters = [], ?string $domain = null, ?string $locale = null): string
 {
     $res = Translation::trans($id, $parameters, $domain, $locale);
     return $res === '' ? $id : $res;
@@ -358,7 +357,7 @@ function trans(string $id, array $parameters = [], string $domain = null, string
  * @param string|null $locale
  * @return string
  */
-function locale(string $locale = null): string
+function locale(?string $locale = null): string
 {
     if (!$locale) {
         return Translation::getLocale();
@@ -568,43 +567,10 @@ function cpu_count(): int
 /**
  * Get request parameters, if no parameter name is passed, an array of all values is returned, default values is supported
  * @param string|null $param param's name
- * @param mixed|null $default default value
- * @return mixed|null
+ * @param mixed $default default value
+ * @return mixed
  */
-function input(string $param = null, $default = null)
+function input(?string $param = null, mixed $default = null): mixed
 {
     return is_null($param) ? request()->all() : request()->input($param, $default);
-}
-
-
-function getAnnotation(string $attributeClassName): array
-{
-    $dirIterator = new \RecursiveDirectoryIterator(app_path());
-    $iterator = new \RecursiveIteratorIterator($dirIterator);
-    $result = [];
-    foreach ($iterator as $file) {
-        // 忽略非PHP文件
-        if ($file->getExtension() != 'php') {
-            continue;
-        }
-
-        // 根据文件路径获取类名
-        $className = str_replace(
-            '/',
-            '\\',
-            substr(substr($file->getPathname(), strlen(base_path())), 0, -4)
-        );
-
-        if (!class_exists($className)) {
-            continue;
-        }
-
-        $controller = new \ReflectionClass($className);
-        $controllerClass = $controller->getAttributes($attributeClassName);
-        if (!isset($controllerClass[0])) {
-            continue;
-        }
-        $result[] = $controller;
-    }
-    return $result;
 }

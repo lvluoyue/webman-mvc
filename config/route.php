@@ -14,7 +14,9 @@
 
 use Webman\Route;
 
-
+Route::fallback(function(){
+    return json(['code' => 404, 'msg' => '404 not found']);
+});
 Route::disableDefaultRoute();
 
 

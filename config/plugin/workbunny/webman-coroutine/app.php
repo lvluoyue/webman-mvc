@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 return [
     // coroutine-web-server 开关
-    'enable'         => false,
+    'enable'         => true,
     // coroutine-web-server 监听端口
-    'port'           => 8717,
+    'port'           => 8787,
     /*
      * @deprecated
      */

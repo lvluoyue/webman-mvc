@@ -6,7 +6,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/
 
 # 安装必要依赖
 RUN apt-get update && apt-get install -y libssl-dev libcurl4-openssl-dev libpq-dev libzip-dev libbz2-dev \
-    libwebp-dev libjpeg-dev libpng-dev libxpm-dev libfreetype6-dev libvpx-dev unzip
+    libwebp-dev libjpeg-dev libpng-dev libfreetype6-dev libvpx-dev unzip libevent-dev
 
 # 安装php扩展
 RUN docker-php-ext-install pcntl pdo_mysql pdo_pgsql sockets zip bz2 gd

@@ -1,4 +1,5 @@
 <?php
+
 namespace app\service\impl;
 
 use app\annotation\Component;
@@ -6,6 +7,9 @@ use app\service\IndexService;
 use DI\Attribute\Inject;
 use support\Db;
 use support\Response;
+use Workbunny\WebmanCoroutine\Utils\Coroutine\Coroutine;
+use Workbunny\WebmanCoroutine\Utils\WaitGroup\WaitGroup;
+use function \Workbunny\WebmanCoroutine\sleep;
 
 #[Component]
 class IndexServiceImpl implements IndexService
@@ -15,7 +19,6 @@ class IndexServiceImpl implements IndexService
 
     public function index(string $v): Response
     {
-
         return json([
             'code' => 200,
             'message' => 'success',
@@ -25,6 +28,27 @@ class IndexServiceImpl implements IndexService
 
     public function mysql(): Response
     {
+//        $waitGroup = new WaitGroup();
+//        $waitGroup->add();
+//        $coroutine1 = new Coroutine(function () use ($waitGroup) {
+//            // do something
+//            sleep(3);
+//            $waitGroup->done();
+//            return 1;
+//        });
+//        $waitGroup->add();
+//        $coroutine2 = new Coroutine(function () use ($waitGroup) {
+//            // do something
+//            sleep(2);
+//            $waitGroup->done();
+//            return 2;
+//        });
+//        $timeOne = microtime(true);
+//        $waitGroup->wait();
+//        echo '[x] [协程1] ' . $coroutine1->id() . PHP_EOL;
+//        echo '[x] [协程2] ' . $coroutine2->id() . PHP_EOL;
+//        $timeTwo = microtime(true);
+//        echo '[x] [运行时间] ' . ($timeTwo - $timeOne) . PHP_EOL;
         return json(Db::table("api_call")->get());
     }
 
