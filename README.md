@@ -1,7 +1,10 @@
 
 # webman-mvc
 
+---
+
 ## 介绍
+
  > webman-mvc 是一个基于 webman 的 mvc 框架，使用composer现有的生态开发，代码规范参考了java的springboot框架，开发环境推荐使用 phpstorm 开发。
 
 ## 特性
@@ -11,6 +14,8 @@
   - 支持依赖注入（php-di/php-di）
   - 支持控制反转
   - 支持单元测试（phpunit/phpunit）
+
+---
 
 ## 安装
   - 开发环境安装
@@ -39,6 +44,8 @@
   docker run -d -v E:\workerman\test:/opt -p 8787:8787 webman-mvc
   ```
   Tips：在使用phpstorm开发时，可直接使用运行配置启动webman-mvc。
+
+---
 
 ## 目录结构
 ```
@@ -90,6 +97,7 @@
  - 所有配置项都可以通过.env文件配置。在docker环境中可在运行时指定环境变量，如：`docker run -e SERVER_APP_DEBUG=true webman-mvc`
  - 配置项可自定义，具体使用请看vlucas/phpdotenv或webman官方文档
  - 框架配置项如下：
+
 ```ini
 # 应用名称
 SERVER_APP_NAME=webman
@@ -120,21 +128,23 @@ DATABASE_CONNECTIONS_MYSQL_DATABASE=db
 # 数据库用户名
 DATABASE_CONNECTIONS_MYSQL_USERNAME=root
 # 数据库密码
-DATABASE_CONNECTIONS_MYSQL_PASSWORD=xiaoxin
+DATABASE_CONNECTIONS_MYSQL_PASSWORD=123456
 
 # pgsql地址
 DATABASE_CONNECTIONS_PGSQL_HOST=127.0.0.1
 # pgsql端口
 DATABASE_CONNECTIONS_PGSQL_PORT=5432
 # 数据库名
-DATABASE_CONNECTIONS_PGSQL_DATABASE=api
+DATABASE_CONNECTIONS_PGSQL_DATABASE=postgres
 # 数据库用户名
 DATABASE_CONNECTIONS_PGSQL_USERNAME=postgres
 # 数据库密码
-DATABASE_CONNECTIONS_PGSQL_PASSWORD=1973546280
+DATABASE_CONNECTIONS_PGSQL_PASSWORD=123456
 # 数据库schema
-DATABASE_CONNECTIONS_PGSQL_SCHEMA=api
+DATABASE_CONNECTIONS_PGSQL_SCHEMA=postgres
 
 # sqlite地址
 DATABASE_CONNECTIONS_SQLITE_PATH=/database.sqlite
 ```
+
+---
