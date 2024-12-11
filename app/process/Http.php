@@ -6,15 +6,20 @@ use DI\Attribute\Inject;
 use Illuminate\Database\Eloquent\Model;
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
+use ReflectionEnum;
 use ReflectionException;
 use ReflectionFunctionAbstract;
 use support\Container;
 use support\exception\BusinessException;
 use support\exception\InputTypeException;
+use support\exception\InputValueException;
 use support\exception\MissingInputException;
+use support\Response;
+use Throwable;
 use Webman\App;
 use Webman\Context;
 use Webman\Http\Request;
+use Workerman\Connection\TcpConnection;
 
 class Http extends App
 {
@@ -130,24 +135,26 @@ class Http extends App
      * @throws BusinessException
      * @throws ReflectionException
      */
-    protected static function resolveMethodDependencies(ContainerInterface $container, Request $request, array $inputs, ReflectionFunctionAbstract $reflector): array
+    protected static function resolveMethodDependencies(ContainerInterface $container, Request $request, array $inputs, ReflectionFunctionAbstract $reflector, bool $debug): array
     {
         $parameters = [];
         foreach ($reflector->getParameters() as $parameter) {
             $parameterName = $parameter->name;
+            $type = $parameter->getType();
+            $typeName = $type?->getName();
+
+            // 注入
             foreach ($parameter->getAttributes() as $attribute) {
                 if($attribute->getName() == Inject::class) {
                     if(empty($attribute->getArguments())) {
-                        throw (new MissingInputException())->setData([
+                        throw (new MissingInputException())->data([
                             'parameter' => $parameterName,
-                        ]);
+                        ])->debug($debug);
                     }
                     $parameters[$parameterName] = Container::get($attribute->getArguments()[0]);
                     continue 2;
                 }
             }
-            $type = $parameter->getType();
-            $typeName = $type ? $type->getName() : null;
 
             if ($typeName && is_a($request, $typeName)) {
                 $parameters[$parameterName] = $request;
@@ -156,10 +163,10 @@ class Http extends App
 
             if (!array_key_exists($parameterName, $inputs)) {
                 if (!$parameter->isDefaultValueAvailable()) {
-                    if (!$typeName || !class_exists($typeName)) {
-                        throw (new MissingInputException())->setData([
+                    if (!$typeName || (!class_exists($typeName) && !enum_exists($typeName)) || enum_exists($typeName)) {
+                        throw (new MissingInputException())->data([
                             'parameter' => $parameterName,
-                        ]);
+                        ])->debug($debug);
                     }
                 } else {
                     $parameters[$parameterName] = $parameter->getDefaultValue();
@@ -167,40 +174,42 @@ class Http extends App
                 }
             }
 
+            $parameterValue = $inputs[$parameterName] ?? null;
+
             switch ($typeName) {
                 case 'int':
                 case 'float':
-                    if (!is_numeric($inputs[$parameterName])) {
-                        throw (new InputTypeException())->setData([
+                    if (!is_numeric($parameterValue)) {
+                        throw (new InputTypeException())->data([
                             'parameter' => $parameterName,
                             'exceptType' => $typeName,
-                            'actualType' => gettype($inputs[$parameterName]),
-                        ]);
+                            'actualType' => gettype($parameterValue),
+                        ])->debug($debug);
                     }
-                    $parameters[$parameterName] = $typeName === 'float' ? (float)$inputs[$parameterName] :  (int)$inputs[$parameterName];
+                    $parameters[$parameterName] = $typeName === 'float' ? (float)$parameterValue :  (int)$parameterValue;
                     break;
                 case 'bool':
-                    $parameters[$parameterName] = (bool)$inputs[$parameterName];
+                    $parameters[$parameterName] = (bool)$parameterValue;
                     break;
                 case 'array':
                 case 'object':
-                    if (!is_array($inputs[$parameterName])) {
-                        throw (new InputTypeException())->setData([
+                    if (!is_array($parameterValue)) {
+                        throw (new InputTypeException())->data([
                             'parameter' => $parameterName,
                             'exceptType' => $typeName,
-                            'actualType' => gettype($inputs[$parameterName]),
-                        ]);
+                            'actualType' => gettype($parameterValue),
+                        ])->debug($debug);
                     }
-                    $parameters[$parameterName] = $typeName === 'object' ? (object)$inputs[$parameterName] : $inputs[$parameterName];
+                    $parameters[$parameterName] = $typeName === 'object' ? (object)$parameterValue : $parameterValue;
                     break;
                 case 'string':
                 case 'mixed':
                 case 'resource':
                 case null:
-                    $parameters[$parameterName] = $inputs[$parameterName];
+                    $parameters[$parameterName] = $parameterValue;
                     break;
                 default:
-                    $subInputs = isset($inputs[$parameterName]) && is_array($inputs[$parameterName]) ? $inputs[$parameterName] : [];
+                    $subInputs = is_array($parameterValue) ? $parameterValue : [];
                     if (is_a($typeName, Model::class, true) || is_a($typeName, ThinkModel::class, true)) {
                         $parameters[$parameterName] = $container->make($typeName, [
                             'attributes' => $subInputs,
@@ -208,15 +217,35 @@ class Http extends App
                         ]);
                         break;
                     }
+                    if (enum_exists($typeName)) {
+                        $reflection = new ReflectionEnum($typeName);
+                        if ($reflection->hasCase($parameterValue)) {
+                            $parameters[$parameterName] = $reflection->getCase($parameterValue)->getValue();
+                            break;
+                        } elseif ($reflection->isBacked()) {
+                            foreach ($reflection->getCases() as $case) {
+                                if ($case->getValue()->value == $parameterValue) {
+                                    $parameters[$parameterName] = $case->getValue();
+                                    break;
+                                }
+                            }
+                        }
+                        if (!array_key_exists($parameterName, $parameters)) {
+                            throw (new InputValueException())->data([
+                                'parameter' => $parameterName,
+                                'enum' => $typeName
+                            ])->debug($debug);
+                        }
+                        break;
+                    }
                     if (is_array($subInputs) && $constructor = (new ReflectionClass($typeName))->getConstructor()) {
-                        $parameters[$parameterName] = $container->make($typeName, static::resolveMethodDependencies($container, $request, $subInputs, $constructor));
+                        $parameters[$parameterName] = $container->make($typeName, static::resolveMethodDependencies($container, $request, $subInputs, $constructor, $debug));
                     } else {
                         $parameters[$parameterName] = $container->make($typeName);
                     }
                     break;
             }
         }
-
         return $parameters;
     }
 

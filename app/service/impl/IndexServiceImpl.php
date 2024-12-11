@@ -7,6 +7,7 @@ use app\service\IndexService;
 use DI\Attribute\Inject;
 use support\Db;
 use support\Response;
+use Webman\Route;
 use Workbunny\WebmanCoroutine\Utils\Coroutine\Coroutine;
 use Workbunny\WebmanCoroutine\Utils\WaitGroup\WaitGroup;
 use function \Workbunny\WebmanCoroutine\sleep;
@@ -19,6 +20,7 @@ class IndexServiceImpl implements IndexService
 
     public function index(string $v): Response
     {
+//        dump(Route::getRoutes());
         return json([
             'code' => 200,
             'message' => 'success',

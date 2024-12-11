@@ -1,8 +1,6 @@
 
 # webman-mvc
 
----
-
 ## 介绍
 
  > webman-mvc 是一个基于 webman 的 mvc 框架，使用composer现有的生态开发，代码规范参考了java的springboot框架，开发环境推荐使用 phpstorm 开发。
@@ -14,8 +12,6 @@
   - 支持依赖注入（php-di/php-di）
   - 支持控制反转
   - 支持单元测试（phpunit/phpunit）
-
----
 
 ## 安装
   - 开发环境安装
@@ -44,8 +40,6 @@
   docker run -d -v E:\workerman\test:/opt -p 8787:8787 webman-mvc
   ```
   Tips：在使用phpstorm开发时，可直接使用运行配置启动webman-mvc。
-
----
 
 ## 目录结构
 ```
@@ -146,5 +140,3 @@ DATABASE_CONNECTIONS_PGSQL_SCHEMA=postgres
 # sqlite地址
 DATABASE_CONNECTIONS_SQLITE_PATH=/database.sqlite
 ```
-
----
