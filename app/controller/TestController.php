@@ -9,6 +9,7 @@ use LinFly\Annotation\Attributes\Route\NamespaceController;
 use LinFly\Annotation\Attributes\Route\RequestMapping;
 use support\Request;
 use support\Response;
+use Workerman\Protocols\Http\Chunk;
 
 
 //#[Controller("/test")]
@@ -23,6 +24,18 @@ class TestController
     public function index(Request $request): Response
     {
         return $this->indexService->index("test");
+    }
+
+    #[GetMapping]
+    public function sse(Request $request): Response
+    {
+        return $this->indexService->sse();
+    }
+
+    #[GetMapping]
+    public function chunked(Request $request): Response
+    {
+        return $this->indexService->chunked();
     }
 
     #[GetMapping]

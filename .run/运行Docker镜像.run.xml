@@ -4,18 +4,6 @@
       <settings>
         <option name="imageTag" value="webman-mvc" />
         <option name="containerName" value="webman" />
-        <option name="envVars">
-          <list>
-            <DockerEnvVarImpl>
-              <option name="name" value="TEST_ABCD" />
-              <option name="value" value="5646" />
-            </DockerEnvVarImpl>
-            <DockerEnvVarImpl>
-              <option name="name" value="TEST_ABC" />
-              <option name="value" value="sdfwesg" />
-            </DockerEnvVarImpl>
-          </list>
-        </option>
         <option name="commandLineOptions" value="--network=host" />
         <option name="volumeBindings">
           <list>

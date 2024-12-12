@@ -10,6 +10,9 @@ use support\Response;
 use Webman\Route;
 use Workbunny\WebmanCoroutine\Utils\Coroutine\Coroutine;
 use Workbunny\WebmanCoroutine\Utils\WaitGroup\WaitGroup;
+use Workerman\Protocols\Http\Chunk;
+use Workerman\Protocols\Http\ServerSentEvents;
+use Workerman\Timer;
 use function \Workbunny\WebmanCoroutine\sleep;
 
 #[Component]
@@ -28,29 +31,95 @@ class IndexServiceImpl implements IndexService
         ]);
     }
 
+    public function sse(): Response
+    {
+        $connection = request()->connection;
+        $waitGroup = new WaitGroup();
+        $waitGroup->add(30);
+        for ($i = 1; $i <= 30; $i++) {
+            /** @var Coroutine[] $coroutine */
+            $coroutine[$i] = new Coroutine(function () use ($waitGroup, $connection, $i, &$coroutine) {
+                sleep(0.1 * $i);
+                $connection->send(new ServerSentEvents([
+                    'event' => 'message',
+                    'data' => 'hello' . $i,
+                    'id' => $i
+                ]));
+                $waitGroup->done();
+            });
+        }
+
+        $timeOne = microtime(true);
+        //设置定时器
+        $timer_id = Timer::add(1, function () use ($connection, $waitGroup, &$timer_id, $timeOne) {
+            // 发送完毕，断开客户端的tcp连接
+            if ($waitGroup->count() == 0) {
+                Timer::del($timer_id);
+                $connection->close(new ServerSentEvents([
+                    'event' => 'close',
+                    'data' => 'close',
+                    'id' => 0
+                ]));
+                $timeTwo = microtime(true);
+                echo '[协程] [运行时间] ' . ($timeTwo - $timeOne) . PHP_EOL;
+            }
+        });
+
+        //tcp关闭连接后立刻停止协程
+        $connection->onClose = function () use($timer_id, &$coroutine) {
+            Timer::del($timer_id);
+            foreach ($coroutine as $unset) {
+                $unset->getCoroutineInterface()->kill(new \Exception);
+            }
+        };
+
+        return response("\r\n")->withHeaders([
+            "Content-Type" => "text/event-stream",
+        ]);
+    }
+
+    function chunked(): Response
+    {
+        $connection = request()->connection;
+        $waitGroup = new WaitGroup();
+        $waitGroup->add(30);
+        for ($i = 1; $i <= 30; $i++) {
+            $coroutine = new Coroutine(function () use ($waitGroup, $connection, $i) {
+                sleep(0.1 * $i);
+                $connection->send(new Chunk($i . " "));
+                $waitGroup->done();
+            });
+        }
+
+        $timeOne = microtime(true);
+        //设置定时器
+        $timer_id = Timer::add(1, function () use ($connection, $waitGroup, &$timer_id, $timeOne) {
+            // 发送完毕，断开客户端的tcp连接
+            if ($waitGroup->count() == 0) {
+                Timer::del($timer_id);
+                $connection->close(new Chunk(''));
+                $timeTwo = microtime(true);
+                echo '[协程] [运行时间] ' . ($timeTwo - $timeOne) . PHP_EOL;
+            }
+        });
+
+
+        //tcp关闭连接后立刻停止协程
+        $connection->onClose = function () use($timer_id, &$coroutine) {
+            Timer::del($timer_id);
+            foreach ($coroutine as $unset) {
+                $unset->getCoroutineInterface()->kill(new \Exception);
+            }
+        };
+
+        return response()->withHeaders([
+            "Transfer-Encoding" => "chunked",
+            "Content-Type" => "application/octet-stream" //二进制流
+        ]);
+    }
+
     public function mysql(): Response
     {
-//        $waitGroup = new WaitGroup();
-//        $waitGroup->add();
-//        $coroutine1 = new Coroutine(function () use ($waitGroup) {
-//            // do something
-//            sleep(3);
-//            $waitGroup->done();
-//            return 1;
-//        });
-//        $waitGroup->add();
-//        $coroutine2 = new Coroutine(function () use ($waitGroup) {
-//            // do something
-//            sleep(2);
-//            $waitGroup->done();
-//            return 2;
-//        });
-//        $timeOne = microtime(true);
-//        $waitGroup->wait();
-//        echo '[x] [协程1] ' . $coroutine1->id() . PHP_EOL;
-//        echo '[x] [协程2] ' . $coroutine2->id() . PHP_EOL;
-//        $timeTwo = microtime(true);
-//        echo '[x] [运行时间] ' . ($timeTwo - $timeOne) . PHP_EOL;
         return json(Db::table("api_call")->get());
     }
 
@@ -63,7 +132,7 @@ class IndexServiceImpl implements IndexService
         ];
         $str = base64_decode($str);
         $str = str_replace("\"", "\\\"", $str);
-        $cmd = "docker run --rm -i -u nobody php php -r \"$str\"";
+        $cmd = "docker run --rm -iu nobody -w /opt php php -r \"$str\"";
         docker_it($cmd, '', $result['output'], $result['error'], $result['runningTime']);
         return json($result);
     }
@@ -81,8 +150,9 @@ class IndexServiceImpl implements IndexService
             mkdir($codeDir, 0777, true);
         }
         file_put_contents($codeDir . 'Main.java', $code);
-        $cmd = "docker run --rm -i -u nobody -v $codeDir:/opt openjdk bash -c \"cd /opt && java Main.java\"";
+        $cmd = "docker run --rm -iu nobody -v $codeDir:/opt -w /opt openjdk bash -c \"java Main.java\"";
         docker_it($cmd, $input, $result['output'], $result['error'], $result['runningTime']);
         return json($result);
     }
+
 }

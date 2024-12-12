@@ -12,6 +12,7 @@
   - 支持依赖注入（php-di/php-di）
   - 支持控制反转
   - 支持单元测试（phpunit/phpunit）
+  - 支持数据库ORM（illuminate/database）
 
 ## 安装
   - 开发环境安装
@@ -32,7 +33,43 @@
   ```shell
   php start.php start -d
   ```
-  - docker环境
+  - docker环境（镜像）
+  ```shell
+  # 启动容器
+  docker run -d -v E:\workerman\test:/opt -p 8787:8787 luoyueapi/webman-mvc
+  ```
+- docker环境（自定义构建）
+
+  在项目根目录下创建Dockerfile文件，内容如下：
+
+  ```dockerfile
+  FROM php:8.3-cli
+  
+  # 安装Composer，用于开发环境
+  #RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+  COPY --from=composer /usr/bin/composer /usr/bin/
+  
+  # 安装必要依赖
+  RUN apt-get update && apt-get install -y libssl-dev libcurl4-openssl-dev libpq-dev libzip-dev libbz2-dev \
+  libwebp-dev libjpeg-dev libpng-dev libfreetype6-dev libvpx-dev unzip libevent-dev
+  
+  # 安装php扩展
+  RUN docker-php-ext-install pcntl pdo_mysql pdo_pgsql sockets zip bz2 gd
+  RUN pecl install redis
+  RUN pecl install -D 'enable-openssl="yes" enable-swoole-curl="yes" enable-http2="yes" enable-swoole-thread="yes"' swoole
+  
+  # 设置挂载点
+  VOLUME ["/opt"]
+  
+  # 设置工作目录
+  WORKDIR /opt
+  
+  # 运行webman
+  ENTRYPOINT ["php", "-d", "extension=swoole", "start.php", "start"]
+  ```
+
+  然后运行如下代码进行构建：
+
   ```shell
   # 构建镜像
   docker build -t webman-mvc .

@@ -11,7 +11,7 @@ use LinFly\Annotation\Attributes\Route\RequestMapping;
 use support\Request;
 use support\Response;
 
-#[Middleware(\app\middleware\testMiddleware::class)]
+//#[Middleware(\app\middleware\testMiddleware::class)]
 #[NamespaceController(namespace: __NAMESPACE__)]
 class Controller
 {

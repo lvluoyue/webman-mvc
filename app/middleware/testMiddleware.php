@@ -12,6 +12,23 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-return [
-    '' => [app\middleware\CrossDomain::class]
-];
+namespace app\middleware;
+
+use Webman\MiddlewareInterface;
+use Webman\Http\Response;
+use Webman\Http\Request;
+
+/**
+ * Class StaticFile
+ * @package app\middleware
+ */
+class testMiddleware implements MiddlewareInterface
+{
+    public function process(Request $request, callable $next): Response
+    {
+        echo '执行前';
+        $response = $next($request);
+        echo '执行后';
+        return $response;
+    }
+}
