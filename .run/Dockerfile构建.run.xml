@@ -2,7 +2,7 @@
   <configuration default="false" name="Dockerfile构建" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
     <deployment type="dockerfile">
       <settings>
-        <option name="imageTag" value="webman-mvc" />
+        <option name="imageTag" value="luoyueapi/webman-mvc" />
         <option name="buildOnly" value="true" />
         <option name="containerName" value="test" />
         <option name="sourceFilePath" value="Dockerfile" />

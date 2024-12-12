@@ -2,7 +2,7 @@
   <configuration default="false" name="运行Docker镜像" type="docker-deploy" factoryName="docker-image" server-name="Docker">
     <deployment type="docker-image">
       <settings>
-        <option name="imageTag" value="webman-mvc" />
+        <option name="imageTag" value="luoyueapi/webman-mvc" />
         <option name="containerName" value="webman" />
         <option name="commandLineOptions" value="--network=host" />
         <option name="volumeBindings">
