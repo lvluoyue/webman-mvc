@@ -5,7 +5,6 @@
 *.log
 .env
 Dockerfile
-/Dockerfile
 /tests/tmp
 /tests/.phpunit.result.cache
 /composer.lock
