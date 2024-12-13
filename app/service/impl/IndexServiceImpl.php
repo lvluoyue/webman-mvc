@@ -132,7 +132,7 @@ class IndexServiceImpl implements IndexService
         ];
         $str = base64_decode($str);
         $str = str_replace("\"", "\\\"", $str);
-        $cmd = "docker run --rm -iu nobody -w /opt php php -r \"$str\"";
+        $cmd = "docker run --rm -iu nobody -w /opt:ro php php -r \"$str\"";
         docker_it($cmd, '', $result['output'], $result['error'], $result['runningTime']);
         return json($result);
     }
@@ -150,8 +150,9 @@ class IndexServiceImpl implements IndexService
             mkdir($codeDir, 0777, true);
         }
         file_put_contents($codeDir . 'Main.java', $code);
-        $cmd = "docker run --rm -iu nobody -v $codeDir:/opt -w /opt openjdk bash -c \"java Main.java\"";
+        $cmd = "docker run --rm -iu nobody -v $codeDir:/opt:ro -w /opt openjdk bash -c \"java Main.java\"";
         docker_it($cmd, $input, $result['output'], $result['error'], $result['runningTime']);
+        unlink($codeDir . 'Main.java');
         return json($result);
     }
 

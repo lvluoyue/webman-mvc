@@ -17,12 +17,28 @@ use support\exception\MissingInputException;
 use support\Response;
 use Throwable;
 use Webman\App;
-use Webman\Context;
 use Webman\Http\Request;
 use Workerman\Connection\TcpConnection;
 
 class Http extends App
 {
+
+    /**
+     * OnWorkerStart.
+     * @param $worker
+     * @return void
+     */
+    public function onWorkerStart($worker)
+    {
+        $appName = env("SERVER_APP_NAME", "webman");
+        $lockPath = runtime_path('windows/start_' . $appName . '.php');
+        if(env('SERVER_OPEN_BROWSER', false) && DIRECTORY_SEPARATOR !== '/' && time() - filemtime($lockPath) <= 3) {
+            $appPort = env('SERVER_APP_PROT', 8787);
+            exec('start http://127.0.0.1:' .  $appPort);
+        }
+        parent::onWorkerStart($worker);
+    }
+
     /**
      * OnMessage.
      * @param TcpConnection|mixed $connection

@@ -117,7 +117,6 @@
 ├── tests                         单元测试目录
 ├── .env                          环境配置文件
 ├── start.php                     服务启动文件
-├── Dockerfile                    docker镜像构建文件
 ├── vendor                        composer安装的第三方类库目录
 └── support                       类库适配(包括第三方类库)
     ├── Request.php               请求类
@@ -149,6 +148,10 @@ SERVER_APP_TIMEZONE=Asia/Shanghai
 SERVER_APP_CONTROLLER_SUFFIX=Controller
 # 是否启用路由复用
 SERVER_APP_CONTROLLER_REUSE=true
+# 是否启用请求协程化
+SERVER_COROUTINE_WEB_ENABLE=true
+# 是否自动打开浏览器(仅windows环境有效)
+SERVER_OPEN_BROWSER=true
 
 # 默认数据库
 DATABASE_DEFAULT=pgsql
