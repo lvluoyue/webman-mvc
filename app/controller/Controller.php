@@ -12,7 +12,6 @@ use support\Request;
 use support\Response;
 
 //#[Middleware(\app\middleware\testMiddleware::class)]
-#[NamespaceController(namespace: __NAMESPACE__)]
 class Controller
 {
     #[Inject]

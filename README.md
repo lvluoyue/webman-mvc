@@ -3,12 +3,12 @@
 
 ## 介绍
 
- > webman-mvc 是一个基于 webman 的 mvc 框架，使用composer现有的生态开发，代码规范参考了java的springboot框架，开发环境推荐使用 phpstorm 开发。
+ > webman-mvc 是一个基于 webman 的 mvc 框架，使用composer现有的生态开发，代码规范参考了java的spring框架，开发环境推荐使用 phpstorm 开发。
 
 ## 特性
   - 支持env配置（vlucas/phpdotenv）
   - 支持协程开发（workbunny/webman-coroutine）
-  - 支持注解开发（linfly/annotation）
+  - 支持注解开发（[linfly/annotation](https://github.com/imlinfly/webman-annotation)）
   - 支持依赖注入（php-di/php-di）
   - 支持控制反转
   - 支持单元测试（phpunit/phpunit）
@@ -25,21 +25,23 @@
   ```
 
 ## 启动
-  - windows环境
+  ### windows环境
   ```shell
   php windows.php
   ```
-  - linux环境
+  ### linux环境
   ```shell
   php start.php start -d
   ```
-  - docker环境（镜像）
+  ### docker环境
+  - 使用官方镜像
   ```shell
   # 启动容器
   docker run -d -v E:\workerman\test:/opt -p 8787:8787 luoyueapi/webman-mvc
   ```
-- docker环境（自定义构建）
 
+  - 自定义构建镜像
+  
   在项目根目录下创建Dockerfile文件，内容如下：
 
   ```dockerfile
@@ -76,7 +78,7 @@
   # 启动容器
   docker run -d -v E:\workerman\test:/opt -p 8787:8787 webman-mvc
   ```
-  Tips：在使用phpstorm开发时，可直接使用运行配置启动webman-mvc。
+  Tips：在使用`phpstorm`开发时，可直接使用运行配置启动`webman-mvc`。
 
 ## 目录结构
 ```
@@ -177,3 +179,68 @@ DATABASE_CONNECTIONS_PGSQL_SCHEMA=postgres
 # sqlite地址
 DATABASE_CONNECTIONS_SQLITE_PATH=/database.sqlite
 ```
+
+## 编写控制器
+  - 注解使用的是[linfly/annotation](https://github.com/imlinfly/webman-annotation),详细参见官方文档。以下为本项目的例子
+  - 控制器的文件名的后缀在webman中是需要与配置文件`SERVER_APP_CONTROLLER_SUFFIX`保持一致，但使用注解模式时，则不需要。 不过为了项目规范，建议使用控制器后缀。
+### 控制器注解
+  - 控制器类必须包含`#[Controller]`注解，如：`#[Controller("/api")]`
+  - 方法必须包含方法注解, 如：`#[GetMapping("index")]`
+  - 示例:在`app/controller`中新建文件`TestController.php`如下代码
+```php
+<?php
+
+namespace app\controller;
+
+use LinFly\Annotation\Attributes\Route\GetMapping;
+use LinFly\Annotation\Attributes\Route\Controller;
+use support\Request;
+use support\Response;
+
+#[Controller("/api")]
+class TestController
+{
+    //GET http://127.0.0.1:8787/api/index
+    #[GetMapping("index")]
+    public function index(Request $request): Response
+    {
+        return json(['code' => 0, 'msg' => 'ok']);
+    }
+}
+```
+
+### 命名空间注解
+  - 控制器类必须包含`#[NamespaceController]`注解，如：`#[NamespaceController(namespace: "app\controller")]`,中间为删除类名中的命名空间前缀后的作为路径，替换后为路由地址。
+  - 使用__NAMESPACE__作为参数，则自动将当前类名做为路由地址。
+  - 示例:在`app/controller`中新建文件`TestController.php`如下代码
+```php
+<?php
+
+namespace app\controller;
+
+use LinFly\Annotation\Attributes\Route\GetMapping;
+use LinFly\Annotation\Attributes\Route\NamespaceController;
+use support\Request;
+use support\Response;
+
+#[NamespaceController(namespace: __NAMESPACE__)]
+class TestController
+{
+    //GET http://127.0.0.1:8787/test/index
+    #[GetMapping("index")]
+    public function index(Request $request): Response
+    {
+        return json(['code' => 0, 'msg' => 'ok']);
+    }
+}
+```
+
+### 方法路由注解
+ - 可使用的注解: `RequestMapping`, `GetMapping`, `PostMapping`, `PutMapping`, `DeleteMapping`, `PatchMapping`, `RequestMapping`
+ - 关于路径参数: 
+   - `#[RequestMapping]`, 不带参数，则使用方法名作为路由地址
+   - `#[RequestMapping("")]`, 则使用控制器前缀作为路由器地址
+   - `#[RequestMapping("/api")]`: 使用根路径，如`/api`
+   - `#[RequestMapping("api")]`: 使用控制器前缀+路径参数，如`#[Controller("/test")]`注解路径为`/test/api`
+   - `#[RequestMapping("/api/{id}")]`: 使用路由参数，如`/api/abc`
+   - `#[RequestMapping("/api/{id:\d+}")]`: 使用正则表达式约束路由参数，如`/api/123`
