@@ -1,0 +1,26 @@
+name: PHP Composer
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Composer install
+      uses: docker://composer
+      with:
+        args: install
+    - name: PHPUnit testing
+      uses: docker://php:8.2
+      with:
+        args: php vendor/bin/phpunit --configuration phpunit.xml --teamcity
