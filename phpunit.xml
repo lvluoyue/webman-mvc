@@ -14,4 +14,8 @@
             <directory>app</directory>
         </include>
     </source>
+    <php>
+        <env name="TEST_ABC" value="dsgw"/>
+        <env name="APP_ENV" value="testing"/>
+    </php>
 </phpunit>

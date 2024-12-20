@@ -51,7 +51,7 @@ class IndexServiceImpl implements IndexService
 
         $timeOne = microtime(true);
         //设置定时器
-        $timer_id = Timer::add(1, function () use ($connection, $waitGroup, &$timer_id, $timeOne) {
+        $timer_id = Timer::add(1, function () use ($connection, $waitGroup, &$timer_id, $timeOne, &$coroutine) {
             // 发送完毕，断开客户端的tcp连接
             if ($waitGroup->count() == 0) {
                 Timer::del($timer_id);
@@ -68,8 +68,12 @@ class IndexServiceImpl implements IndexService
         //tcp关闭连接后立刻停止协程
         $connection->onClose = function () use($timer_id, &$coroutine) {
             Timer::del($timer_id);
-            foreach ($coroutine as $unset) {
-                $unset->getCoroutineInterface()->kill(new \Exception);
+            foreach ($coroutine as $weakMap) {
+                $weakMap->kill($weakMap);
+            }
+            foreach ($weakMap->getCoroutinesWeakMap()->getIterator() as $value) {
+                [$seconds, $microseconds] = explode('.', $value['startTime']);
+                echo '[协程] [' . $value['id'] . '] ' . date('Y-m-d H:i:s', $seconds) . ' ' . $microseconds . PHP_EOL;
             }
         };
 

@@ -24,5 +24,4 @@ jobs:
       uses: docker://php:8.2
       with:
         args:
-          echo 'TEST_ABC=dfsf' >> .env
           php vendor/bin/phpunit --configuration phpunit.xml --teamcity
