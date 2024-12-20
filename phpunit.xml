@@ -4,8 +4,14 @@
          testdox="true"
          bootstrap="support/bootstrap.php">
     <testsuites>
-        <testsuite name="Unit">
+        <testsuite name="tests">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
+
+    <source>
+        <include>
+            <directory>app</directory>
+        </include>
+    </source>
 </phpunit>

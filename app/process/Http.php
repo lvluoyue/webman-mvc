@@ -31,10 +31,9 @@ class Http extends App
     public function onWorkerStart($worker)
     {
         $appName = env("SERVER_APP_NAME", "webman");
-        $lockPath = runtime_path('windows/start_' . $appName . '.php');
-        if(env('SERVER_OPEN_BROWSER', false) && DIRECTORY_SEPARATOR !== '/' && time() - filemtime($lockPath) <= 3) {
-            $appPort = env('SERVER_APP_PROT', 8787);
-            exec('start http://127.0.0.1:' .  $appPort);
+        $lockFile = runtime_path("windows/start_$appName.php");
+        if(env('SERVER_OPEN_BROWSER', false) && DIRECTORY_SEPARATOR !== '/' && time() - filemtime($lockFile) <= 3) {
+            exec('start http://127.0.0.1:' .  env('SERVER_APP_PROT', 8787));
         }
         parent::onWorkerStart($worker);
     }

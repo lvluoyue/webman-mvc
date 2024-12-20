@@ -1,12 +1,12 @@
 <?php
 
-namespace tests;
-
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-class TestConfig extends TestCase
+class TestConfigTest extends TestCase
 {
+    #[Test]
     #[TestDox("fgf")]
     public function testAppConfig()
     {

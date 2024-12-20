@@ -14,10 +14,6 @@
 
 use Webman\Route;
 
-Route::fallback(function(){
-    return json(['code' => 404, 'msg' => '404 not found']);
-});
+Route::fallback(fn() => json(['code' => 404, 'msg' => '404 not found']))
+    ->middleware([app\middleware\CrossDomain::class]);
 Route::disableDefaultRoute();
-
-
-
