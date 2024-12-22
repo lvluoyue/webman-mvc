@@ -11,11 +11,11 @@
 
     <source>
         <include>
-            <directory>app</directory>
+            <directory suffix=".php">app</directory>
         </include>
     </source>
     <php>
-        <env name="TEST_ABC" value="dsgw"/>
         <env name="APP_ENV" value="testing"/>
+        <env name="TEST_DATA" value="Hello Test"/>
     </php>
 </phpunit>

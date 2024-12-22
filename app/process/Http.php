@@ -30,7 +30,6 @@ class Http extends App
      */
     public function onWorkerStart($worker)
     {
-        print_r(get_class($worker));
         $appName = env("SERVER_APP_NAME", "webman");
         $lockFile = runtime_path("windows/start_$appName.php");
         if(env('SERVER_OPEN_BROWSER', false) && DIRECTORY_SEPARATOR !== '/' && time() - filemtime($lockFile) <= 3) {

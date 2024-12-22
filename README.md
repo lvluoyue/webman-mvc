@@ -126,65 +126,16 @@
 ```
 
 ## env配置
- - 所有配置项都可以通过.env文件配置。在docker环境中可在运行时指定环境变量，如：`docker run -e SERVER_APP_DEBUG=true webman-mvc`
- - 配置项可自定义，具体使用请看vlucas/phpdotenv或webman官方文档
- - 框架配置项如下：
+ - 所有配置项都可以通过.env文件配置。在docker环境中可在运行时指定环境变量，如：`docker run -e SERVER_APP_DEBUG=true webman-mvc`。
+ - 配置项可自定义，具体使用请看vlucas/phpdotenv或webman官方文档。
+ - 系统默认配置项在.env.example中，并且是默认值。如需更改请执行如下命令。
 
-```ini
-# 应用名称
-SERVER_APP_NAME=webman
-# 是否开启debug模式
-SERVER_APP_DEBUG=true
-
-# 监听地址
-SERVER_APP_ADDRESS=0.0.0.0
-# 监听端口
-SERVER_APP_PROT=8787
-# 进程数
-SERVER_APP_PROCESS=40
-# 时区
-SERVER_APP_TIMEZONE=Asia/Shanghai
-# 控制器后缀
-SERVER_APP_CONTROLLER_SUFFIX=Controller
-# 是否启用路由复用
-SERVER_APP_CONTROLLER_REUSE=true
-# 是否启用请求协程化
-SERVER_COROUTINE_WEB_ENABLE=true
-# 是否自动打开浏览器(仅windows环境有效)
-SERVER_OPEN_BROWSER=true
-
-# 默认数据库
-DATABASE_DEFAULT=pgsql
-# mysql地址
-DATABASE_CONNECTIONS_MYSQL_HOST=127.0.0.1
-# mysql端口
-DATABASE_CONNECTIONS_MYSQL_PORT=3306
-# 数据库名
-DATABASE_CONNECTIONS_MYSQL_DATABASE=db
-# 数据库用户名
-DATABASE_CONNECTIONS_MYSQL_USERNAME=root
-# 数据库密码
-DATABASE_CONNECTIONS_MYSQL_PASSWORD=123456
-
-# pgsql地址
-DATABASE_CONNECTIONS_PGSQL_HOST=127.0.0.1
-# pgsql端口
-DATABASE_CONNECTIONS_PGSQL_PORT=5432
-# 数据库名
-DATABASE_CONNECTIONS_PGSQL_DATABASE=postgres
-# 数据库用户名
-DATABASE_CONNECTIONS_PGSQL_USERNAME=postgres
-# 数据库密码
-DATABASE_CONNECTIONS_PGSQL_PASSWORD=123456
-# 数据库schema
-DATABASE_CONNECTIONS_PGSQL_SCHEMA=postgres
-
-# sqlite地址
-DATABASE_CONNECTIONS_SQLITE_PATH=/database.sqlite
+```shell
+cp .env.example .env
 ```
 
 ## 编写控制器
-  - 注解使用的是[linfly/annotation](https://github.com/imlinfly/webman-annotation),详细参见官方文档。以下为本项目的例子
+  - 注解使用的是[linfly/annotation](https://github.com/imlinfly/webman-annotation),详细参见官方文档。以下为本项目的例子。
   - 控制器的文件名的后缀在webman中是需要与配置文件`SERVER_APP_CONTROLLER_SUFFIX`保持一致，但使用注解模式时，则不需要。 不过为了项目规范，建议使用控制器后缀。
 ### 控制器注解
   - 控制器类必须包含`#[Controller]`注解，如：`#[Controller("/api")]`

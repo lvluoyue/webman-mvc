@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 class TestConfigTest extends TestCase
 {
     #[Test]
-    #[TestDox("fgf")]
     public function testAppConfig()
     {
         $config = config('app');

@@ -9,8 +9,7 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use support\Container;
 
-#[TestDox("测试")]
-class IndexControllerTest extends TestCase
+class ControllerTest extends TestCase
 {
 
     #[Inject]
@@ -23,15 +22,14 @@ class IndexControllerTest extends TestCase
     }
 
     #[Test]
-    #[TestDox("测试 IndexController::index 方法")]
     public function testIndex()
     {
-        self::assertIsObject($this->controller->index('index'));
+        self::assertIsObject($this->controller->index());
     }
 
     #[Test]
     public function testIndex1()
     {
-        self::assertIsObject($this->controller->index('index'));
+        self::assertIsObject($this->controller->index());
     }
 }

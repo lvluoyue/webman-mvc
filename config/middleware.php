@@ -13,5 +13,4 @@
  */
 
 return [
-    '' => [app\middleware\CrossDomain::class]
 ];
