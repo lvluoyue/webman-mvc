@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 return [
     // coroutine-web-server 开关
-    'enable'         => env('SERVER_COROUTINE_WEB_ENABLE', false),
+    'enable'         => false,
     // coroutine-web-server 监听端口
     'port'           => 8787,
     /*
