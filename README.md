@@ -45,7 +45,7 @@
   在项目根目录下创建Dockerfile文件，内容如下：
 
   ```dockerfile
-  FROM php:8.3-cli
+  FROM php:8.3-zts
   
   # 安装Composer，用于开发环境
   #RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

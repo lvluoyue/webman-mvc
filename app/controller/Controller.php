@@ -4,9 +4,6 @@ namespace app\controller;
 
 use app\service\IndexService;
 use DI\Attribute\Inject;
-use LinFly\Annotation\Attributes\Route\Middleware;
-use LinFly\Annotation\Attributes\Route\NamespaceController;
-use LinFly\Annotation\Attributes\Route\PostMapping;
 use LinFly\Annotation\Attributes\Route\RequestMapping;
 use support\Request;
 use support\Response;
