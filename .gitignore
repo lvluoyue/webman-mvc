@@ -7,6 +7,5 @@
 Dockerfile
 /tests/tmp
 /tests/.phpunit.result.cache
-/composer.lock
 /build/webman.phar
 /.phpunit.result.cache
