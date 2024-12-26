@@ -16,4 +16,4 @@ use Webman\Route;
 
 Route::fallback(fn() => json(['code' => 404, 'msg' => '404 not found']));
 
-Route::disableDefaultRoute();
+env('ROIUTE_DISABLE_DEFAULT_ROUTE', true) &&  Route::disableDefaultRoute();
