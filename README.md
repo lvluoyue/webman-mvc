@@ -17,11 +17,11 @@
 ## 安装
   - 开发环境安装
   ```shell
-  composer install
+  composer install --optimize-autoloader --classmap-authoritative
   ```
   - 生产环境安装
   ```shell
-  composer install --no-dev
+     composer install --no-dev --optimize-autoloader --classmap-authoritative
   ```
 
 ## 启动

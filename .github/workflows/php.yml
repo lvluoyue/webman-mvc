@@ -19,7 +19,7 @@ jobs:
     - name: Composer install
       uses: docker://composer
       with:
-        args: install
+        args: install --no-dev --optimize-autoloader --classmap-authoritative
     - name: PHPUnit testing
       uses: docker://php:8.2
       with:
