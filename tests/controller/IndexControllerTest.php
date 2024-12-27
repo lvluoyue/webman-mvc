@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use support\Container;
 
-class ControllerTest extends TestCase
+class IndexControllerTest extends TestCase
 {
 
     #[Inject]

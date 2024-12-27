@@ -8,7 +8,7 @@ use LinFly\Annotation\Attributes\Route\RequestMapping;
 use support\Request;
 use support\Response;
 
-class Controller
+class IndexController
 {
     #[Inject]
     private readonly IndexService $indexService;
@@ -16,7 +16,7 @@ class Controller
     #[RequestMapping("")]
     public function index(Request $request): Response
     {
-        return $this->indexService->index();
+        return json($this->indexService->index());
     }
 
 }
