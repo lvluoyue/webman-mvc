@@ -5,7 +5,6 @@ namespace controller;
 use app\service\IndexService;
 use DI\Attribute\Inject;
 use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use support\Container;
 
@@ -15,10 +14,9 @@ class ControllerTest extends TestCase
     #[Inject]
     private IndexService $controller;
 
-    public function __construct(string $name)
+    public function setUp(): void
     {
         Container::injectOn($this);
-        parent::__construct($name);
     }
 
     #[Test]
