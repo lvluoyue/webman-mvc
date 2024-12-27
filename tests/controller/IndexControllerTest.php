@@ -20,8 +20,11 @@ class IndexControllerTest extends TestCase
     }
 
     #[Test]
-    public function testIndex()
+    public function index()
     {
-        self::assertIsObject($this->controller->index());
+        $data = $this->controller->index();
+        self::assertIsArray($data);
+        self::assertArrayHasKey('data', $data);
+        self::assertIsString($data['data'], 'data不是字符串');
     }
 }
