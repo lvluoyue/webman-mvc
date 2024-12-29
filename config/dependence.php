@@ -45,7 +45,7 @@ if (!function_exists('getAnnotation')) {
     }
 }
 $dependencies = [...$_ENV];
-$compoents = getAnnotation(\app\annotation\Component::class);
+$compoents = getAnnotation(\app\annotation\Service::class);
 
 /** @var \ReflectionClass $reflectionClass */
 foreach ($compoents as $reflectionClass) {

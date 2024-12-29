@@ -2,11 +2,11 @@
 
 namespace app\service\impl;
 
-use app\annotation\Component;
+use app\annotation\Service;
 use app\service\IndexService;
 use DI\Attribute\Inject;
 
-#[Component]
+#[Service]
 class IndexServiceImpl implements IndexService
 {
     #[Inject("TEST_DATA")]

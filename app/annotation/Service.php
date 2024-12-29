@@ -8,7 +8,7 @@ namespace app\annotation;
  * 这对于面向接口注入有很大的帮助，因为DI并不知道具体使用哪个实现类
  */
 #[\Attribute(\Attribute::TARGET_CLASS)]
-class Component
+class Service
 {
     public function __construct()
     {

@@ -291,10 +291,10 @@ interface IndexService {
 // app/service/impl/IndexServiceImpl.php
 namespace app\service;
 
-use app\annotation\Component;
+use app\annotation\Service;
 use app\service\IndexService;
 
-#[Component]
+#[Service]
 class IndexServiceImpl implements IndexService
 {
 
