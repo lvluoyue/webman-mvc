@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a5c8701ec7c59089b7caffb5e834808",
+    "content-hash": "1458111c2c1cd83598f7e695a4da059f",
     "packages": [
         {
             "name": "brick/math",
@@ -1004,21 +1004,21 @@
         },
         {
             "name": "linfly/annotation",
-            "version": "2.0.1",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/imlinfly/webman-annotation.git",
-                "reference": "c25de116d76428575d5b261a52d29698a9624f29"
+                "reference": "1ad9eeedf112f6cb0b2e61ff8c7e9244cdf62703"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imlinfly/webman-annotation/zipball/c25de116d76428575d5b261a52d29698a9624f29",
-                "reference": "c25de116d76428575d5b261a52d29698a9624f29",
+                "url": "https://api.github.com/repos/imlinfly/webman-annotation/zipball/1ad9eeedf112f6cb0b2e61ff8c7e9244cdf62703",
+                "reference": "1ad9eeedf112f6cb0b2e61ff8c7e9244cdf62703",
                 "shasum": ""
             },
             "require": {
-                "linfly/container": "^1.0",
-                "php": "^8.0"
+                "php": "^8.0",
+                "php-di/php-di": "^7.0"
             },
             "type": "library",
             "autoload": {
@@ -1033,47 +1033,54 @@
             "description": "Webman plugin linfly/annotation",
             "support": {
                 "issues": "https://github.com/imlinfly/webman-annotation/issues",
-                "source": "https://github.com/imlinfly/webman-annotation/tree/2.0.1"
+                "source": "https://github.com/imlinfly/webman-annotation/tree/2.1.0"
             },
-            "time": "2024-12-23T10:12:35+00:00"
+            "time": "2024-12-30T02:32:13+00:00"
         },
         {
-            "name": "linfly/container",
-            "version": "1.0.4",
+            "name": "luoyue/webman-aop",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/imlinfly/php-container.git",
-                "reference": "9f3d3f9d35de6587c4870bedb130e17596a2f7b4"
+                "url": "https://github.com/lvluoyue/webman-aop.git",
+                "reference": "114b2823e117c814126add8511256ac1a5fd82c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imlinfly/php-container/zipball/9f3d3f9d35de6587c4870bedb130e17596a2f7b4",
-                "reference": "9f3d3f9d35de6587c4870bedb130e17596a2f7b4",
+                "url": "https://api.github.com/repos/lvluoyue/webman-aop/zipball/114b2823e117c814126add8511256ac1a5fd82c5",
+                "reference": "114b2823e117c814126add8511256ac1a5fd82c5",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0",
-                "psr/container": ">=1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.5"
+                "nikic/php-parser": "^5.0",
+                "php": ">=7.2"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "LinFly\\": "src/"
+                    "yzh52521\\aop\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "description": "linfly-container",
+            "authors": [
+                {
+                    "name": "yzh52521",
+                    "email": "396751927@qq.com"
+                }
+            ],
+            "description": "aop aspect 切片 for the webman plugin",
+            "keywords": [
+                "aop",
+                "aspect",
+                "切片"
+            ],
             "support": {
-                "issues": "https://github.com/imlinfly/php-container/issues",
-                "source": "https://github.com/imlinfly/php-container/tree/1.0.4"
+                "source": "https://github.com/lvluoyue/webman-aop/tree/1.0.2"
             },
-            "time": "2023-05-16T08:03:31+00:00"
+            "time": "2024-12-31T15:14:09+00:00"
         },
         {
             "name": "monolog/monolog",
