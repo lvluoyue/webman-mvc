@@ -6,6 +6,7 @@
 ![Packagist Version](https://img.shields.io/packagist/v/luoyue/webman-mvc)
 ![Packagist License](https://img.shields.io/packagist/l/luoyue/webman-mvc)
 ![Packagist Dependency Version](https://img.shields.io/packagist/dependency-v/luoyue/webman-mvc/php)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/lvluoyue/webman-mvc/php.yml)
 ![Packagist Downloads](https://img.shields.io/packagist/dt/luoyue/webman-mvc)
 ![Packagist Stars](https://img.shields.io/packagist/stars/luoyue/webman-mvc)
 
