@@ -1,15 +1,13 @@
 
 # webman-mvc
 
-## 介绍
-
  > webman-mvc 是一个基于 webman 的 mvc 框架，使用composer现有的生态开发，代码规范参考了java的spring框架，开发环境推荐使用 phpstorm 开发。
 
-<p align="center">
-<a href="LICENSE"><img src="https://img.shields.io/packagist/l/luoyue/webman-mvc" alt="Software License"></img></a>
-<a href="https://packagist.org/packages/luoyue/webman-mvc"><img src="https://img.shields.io/packagist/dt/luoyue/webman-mvc.svg?style=flat-square" alt="Total Downloads"></img></a>
-<a href="https://github.com/luoyue/webman-mvc/releases"><img src="https://img.shields.io/github/release/luoyue/webman-mvc.svg?style=flat-square" alt="Latest Version"></img></a>
-</p>
+![Packagist Version](https://img.shields.io/packagist/v/luoyue/webman-mvc)
+![Packagist License](https://img.shields.io/packagist/l/luoyue/webman-mvc)
+![Packagist Dependency Version](https://img.shields.io/packagist/dependency-v/luoyue/webman-mvc/php)
+![Packagist Downloads](https://img.shields.io/packagist/dt/luoyue/webman-mvc)
+![Packagist Stars](https://img.shields.io/packagist/stars/luoyue/webman-mvc)
 
 ## 特性
   - 支持env配置（[vlucas/phpdotenv](https://github.com/vlucas/phpdotenv)）
@@ -23,11 +21,10 @@
   - 支持数据库ORM（illuminate/database）
 
 ## 安装
-  - 开发环境安装
   ```shell
-  composer install
+  composer create-project luoyue/webman-mvc
   ```
-  - 生产环境安装
+生产环境时执行以下命令可以减少代码体积。
   ```shell
   composer install --no-dev
   ```
