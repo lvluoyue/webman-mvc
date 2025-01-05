@@ -41,6 +41,12 @@ jobs:
           run: composer update ${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-progress
       -   name: PHPUnit
           run: vendor/bin/phpunit
+      -   name: Run tests and collect coverage
+          run: vendor/bin/phpunit --coverage-clover coverage.xml .
+      -   name: Upload coverage to Codecov
+          uses: codecov/codecov-action@v5
+          env:
+            CODECOV_TOKEN: ${{ secrets.CODECOV_ORG_TOKEN }}
       -   name: Install PHP dependenciess
           run: composer update --no-dev --no-interaction
       -   name: Run dependencies

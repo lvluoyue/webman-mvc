@@ -16,10 +16,9 @@
   - 支持注解开发（[linfly/annotation](https://github.com/imlinfly/webman-annotation)）
   - 支持验证器（[topthink/think-validate](https://github.com/top-think/think-validate)）
   - 支持依赖注入（[php-di/php-di](https://github.com/PHP-DI/PHP-DI)）
-  - 支持切面编程(AOP)（[luoyue/webman-aop](https://github.com/lvluoyue/webman-aop)）
-  - 支持控制反转
+  - 支持AOP面向切面编程([luoyue/webman-aop](https://github.com/lvluoyue/webman-aop))
   - 支持单元测试（[phpunit/phpunit](https://github.com/sebastianbergmann/phpunit)）
-  - 支持数据库ORM（illuminate/database）
+  - 支持数据库ORM（[illuminate/database](https://github.com/illuminate/database)）
 
 ## 安装
   ```shell
