@@ -1,8 +1,8 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
-    ->in(__DIR__ . '/src')
-    ->notPath('process');
+    ->in('./app')
+    ->notPath('./process');
 $config = new PhpCsFixer\Config;
 
 return $config->setRules([
