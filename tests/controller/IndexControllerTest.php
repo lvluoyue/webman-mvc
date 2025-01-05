@@ -1,6 +1,6 @@
 <?php
 
-namespace controller;
+namespace tests\controller;
 
 use app\service\IndexService;
 use DI\Attribute\Inject;

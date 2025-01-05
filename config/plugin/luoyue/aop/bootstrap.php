@@ -13,5 +13,5 @@
  */
 
 return [
-    yzh52521\aop\AopBootStrap::class,
+    luoyue\aop\AopBootstrap::class,
 ];

@@ -1,7 +1,8 @@
 <?php
 
+namespace tests;
+
 use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
 class TestConfigTest extends TestCase

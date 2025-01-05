@@ -16,12 +16,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Composer install
-      uses: docker://composer
-      with:
-        args: install --no-dev --optimize-autoloader --classmap-authoritative
-    - name: PHPUnit testing
-      uses: docker://php:8.2
+    - name: Composer install and PHPUnit testing
+      uses: docker://luoyue/webman-mvc
       with:
         args:
+          composer install --no-dev --optimize-autoloader --classmap-authoritative
           php vendor/bin/phpunit --configuration phpunit.xml --teamcity

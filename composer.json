@@ -1,5 +1,5 @@
 {
-  "name": "workerman/webman",
+  "name": "luoyue/webman-mvc",
   "type": "project",
   "keywords": [
     "high performance",
@@ -10,8 +10,8 @@
   "description": "High performance HTTP Service Framework.",
   "authors": [
     {
-      "name": "walkor",
-      "email": "walkor@workerman.net",
+      "name": "luoyue",
+      "email": "1569097443@qq.com",
       "homepage": "https://www.workerman.net",
       "role": "Developer"
     }
@@ -25,7 +25,6 @@
   },
   "require": {
     "php": ">=8.2",
-    "ext-pdo": "*",
     "workerman/workerman": "^v5.0.0-rc.3",
     "workerman/webman-framework": "^1.6.8",
     "linfly/annotation": "^2.0.1",
