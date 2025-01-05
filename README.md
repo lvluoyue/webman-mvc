@@ -23,7 +23,7 @@
   ```
   - 生产环境安装
   ```shell
-  composer install --no-dev --optimize-autoloader --classmap-authoritative
+  composer install --no-dev
   ```
 
 ## 启动

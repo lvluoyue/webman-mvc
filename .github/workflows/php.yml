@@ -41,6 +41,10 @@ jobs:
           run: composer update ${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-progress
       -   name: PHPUnit
           run: vendor/bin/phpunit
+      -   name: dependencies
+          run:
+            composer install --no-dev
+            php start.php start -d
 
   cs:
     name: Coding standards
@@ -61,6 +65,6 @@ jobs:
             key: php-composer-locked-${{ hashFiles('composer.lock') }}
             restore-keys: php-composer-locked-
       -   name: Install PHP dependencies
-          run: composer install --no-interaction --no-progress
+          run: composer install --no-interaction --no-progress --no-dev
       -   name: PHP CS Fixer
           run: vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle | cs2pr

@@ -11,6 +11,7 @@ return $config->setRules([
     '@PHP81Migration' => true,
     '@PHP82Migration' => true,
     '@PHP83Migration' => true,
+    '@PHP84Migration' => true,
     '@Symfony' => true,
     '@Symfony:risky' => true,
     'array_syntax' => ['syntax' => 'short'],
