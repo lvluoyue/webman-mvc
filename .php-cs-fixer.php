@@ -2,7 +2,7 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__ . '/app')
-    ->notPath('Compiler/Template.php');
+    ->notPath('process');
 $config = new PhpCsFixer\Config;
 
 return $config->setRules([
@@ -51,7 +51,9 @@ return $config->setRules([
     'strict_comparison' => true,
     'strict_param' => true,
     'yoda_style' => false,
-    'native_function_invocation' => false,
+    'native_function_invocation' => [
+        'strict' => false
+    ],
     'single_line_throw' => false,
     'php_unit_method_casing' => false,
     'blank_line_between_import_groups' => false,

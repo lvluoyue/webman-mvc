@@ -4,6 +4,7 @@ namespace app\process;
 
 use DI\Attribute\Inject;
 use Illuminate\Database\Eloquent\Model;
+use think\Model as ThinkModel;
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
 use ReflectionEnum;
@@ -14,11 +15,8 @@ use support\exception\BusinessException;
 use support\exception\InputTypeException;
 use support\exception\InputValueException;
 use support\exception\MissingInputException;
-use support\Response;
-use Throwable;
 use Webman\App;
 use Webman\Http\Request;
-use Workerman\Connection\TcpConnection;
 
 class Http extends App
 {
@@ -34,31 +32,6 @@ class Http extends App
             exec('start http://127.0.0.1:' . env('SERVER_APP_PROT', 8787));
         }
         parent::onWorkerStart($worker);
-    }
-
-    /**
-     * OnMessage.
-     * @param TcpConnection|mixed $connection
-     * @param Request|mixed $request
-     * @return null
-     * @throws Throwable
-     */
-    public function onMessage($connection, $request)
-    {
-        parent::onMessage($connection, $request);
-    }
-
-    /**
-     * Send.
-     * @param TcpConnection|mixed $connection
-     * @param mixed|Response $response
-     * @param Request|mixed $request
-     * @return void
-     */
-    protected static function send($connection, $response, $request)
-    {
-        //        print_r(Context::get());
-        parent::send($connection, $response, $request);
     }
 
     /**
