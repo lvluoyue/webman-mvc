@@ -13,10 +13,9 @@ class IndexController
     #[Inject]
     private readonly IndexService $indexService;
 
-    #[RequestMapping("")]
-    public function index(Request $request): Response
+    #[RequestMapping('')]
+    public function index(Request $request) : Response
     {
         return json($this->indexService->index());
     }
-
 }

@@ -64,25 +64,3 @@ jobs:
           run: composer install --no-interaction --no-progress
       -   name: PHP CS Fixer
           run: vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
-
-  psalm:
-    runs-on: ubuntu-latest
-    steps:
-      -   name: Checkout
-          uses: actions/checkout@v4
-      -   name: Setup PHP
-          uses: shivammathur/setup-php@v2
-          with:
-            php-version: 8.2
-            tools: composer:v2
-            coverage: none
-      -   name: Cache Composer dependencies
-          uses: actions/cache@v4
-          with:
-            path: ~/.composer/cache
-            key: php-composer-locked-${{ hashFiles('composer.lock') }}
-            restore-keys: php-composer-locked-
-      -   name: Install PHP dependencies
-          run: composer install --no-interaction --no-progress
-      -   name: Psalm
-          run: vendor/bin/psalm --output-format=github

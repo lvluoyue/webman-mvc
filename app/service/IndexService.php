@@ -2,6 +2,7 @@
 
 namespace app\service;
 
-interface IndexService {
-    function index(): array;
+interface IndexService
+{
+    public function index() : array;
 }

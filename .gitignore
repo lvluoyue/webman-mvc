@@ -9,3 +9,4 @@ Dockerfile
 /tests/.phpunit.result.cache
 /build/webman.phar
 /.phpunit.result.cache
+/.php-cs-fixer.cache

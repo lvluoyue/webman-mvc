@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of webman.
  *
@@ -8,7 +9,7 @@
  *
  * @author    walkor<walkor@workerman.net>
  * @copyright walkor<walkor@workerman.net>
- * @link      http://www.workerman.net/
+ * @see      http://www.workerman.net/
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
@@ -22,8 +23,7 @@ use Workerman\Timer;
 use Workerman\Worker;
 
 /**
- * Class FileMonitor
- * @package process
+ * Class FileMonitor.
  */
 class Monitor
 {
@@ -48,7 +48,7 @@ class Monitor
     public static $lockFile = __DIR__ . '/../runtime/monitor.lock';
 
     /**
-     * Pause monitor
+     * Pause monitor.
      * @return void
      */
     public static function pause()
@@ -57,10 +57,9 @@ class Monitor
     }
 
     /**
-     * Resume monitor
-     * @return void
+     * Resume monitor.
      */
-    public static function resume(): void
+    public static function resume() : void
     {
         clearstatcache();
         if (is_file(static::$lockFile)) {
@@ -69,25 +68,22 @@ class Monitor
     }
 
     /**
-     * Whether monitor is paused
-     * @return bool
+     * Whether monitor is paused.
      */
-    public static function isPaused(): bool
+    public static function isPaused() : bool
     {
         clearstatcache();
+
         return file_exists(static::$lockFile);
     }
 
     /**
      * FileMonitor constructor.
-     * @param $monitorDir
-     * @param $monitorExtensions
-     * @param array $options
      */
     public function __construct($monitorDir, $monitorExtensions, array $options = [])
     {
         static::resume();
-        $this->paths = (array)$monitorDir;
+        $this->paths = (array) $monitorDir;
         $this->extensions = $monitorExtensions;
         foreach (get_included_files() as $index => $file) {
             $this->loadedFiles[$file] = $index;
@@ -100,7 +96,7 @@ class Monitor
         }
         $disableFunctions = explode(',', ini_get('disable_functions'));
         if (in_array('exec', $disableFunctions, true)) {
-            echo "\nMonitor file change turned off because exec() has been disabled by disable_functions setting in " . PHP_CONFIG_FILE_PATH . "/php.ini\n";
+            echo "\nMonitor file change turned off because exec() has been disabled by disable_functions setting in " . \PHP_CONFIG_FILE_PATH . "/php.ini\n";
         } else {
             if ($options['enable_file_monitor'] ?? true) {
                 Timer::add(1, function () {
@@ -115,11 +111,7 @@ class Monitor
         }
     }
 
-    /**
-     * @param $monitorDir
-     * @return bool
-     */
-    public function checkFilesChange($monitorDir): bool
+    public function checkFilesChange($monitorDir) : bool
     {
         static $lastMtime, $tooManyFilesCheck;
         if (!$lastMtime) {
@@ -138,7 +130,7 @@ class Monitor
         }
         $count = 0;
         foreach ($iterator as $file) {
-            $count ++;
+            ++$count;
             /** var SplFileInfo $file */
             if (is_dir($file->getRealPath())) {
                 continue;
@@ -146,18 +138,18 @@ class Monitor
             // check mtime
             if (in_array($file->getExtension(), $this->extensions, true) && $lastMtime < $file->getMTime()) {
                 $lastMtime = $file->getMTime();
-                if (DIRECTORY_SEPARATOR === '/' && isset($this->loadedFiles[$file->getRealPath()])) {
+                if (\DIRECTORY_SEPARATOR === '/' && isset($this->loadedFiles[$file->getRealPath()])) {
                     echo "$file updated but cannot be reloaded because only auto-loaded files support reload.\n";
                     continue;
                 }
                 $var = 0;
-                exec('"'.PHP_BINARY . '" -l ' . $file, $out, $var);
+                exec('"' . \PHP_BINARY . '" -l ' . $file, $out, $var);
                 if ($var) {
                     continue;
                 }
                 echo $file . " updated and reload\n";
                 // send SIGUSR1 signal to master process for reload
-                if (DIRECTORY_SEPARATOR === '/') {
+                if (\DIRECTORY_SEPARATOR === '/') {
                     posix_kill(posix_getppid(), SIGUSR1);
                 } else {
                     return true;
@@ -169,13 +161,11 @@ class Monitor
             echo "Monitor: There are too many files ($count files) in $monitorDir which makes file monitoring very slow\n";
             $tooManyFilesCheck = 1;
         }
+
         return false;
     }
 
-    /**
-     * @return bool
-     */
-    public function checkAllFilesChange(): bool
+    public function checkAllFilesChange() : bool
     {
         if (static::isPaused()) {
             return false;
@@ -185,11 +175,11 @@ class Monitor
                 return true;
             }
         }
+
         return false;
     }
 
     /**
-     * @param $memoryLimit
      * @return void
      */
     public function checkMemory($memoryLimit)
@@ -203,7 +193,7 @@ class Monitor
             return;
         }
         foreach (explode(' ', $children) as $pid) {
-            $pid = (int)$pid;
+            $pid = (int) $pid;
             $statusFile = "/proc/$pid/status";
             if (!is_file($statusFile) || !($status = file_get_contents($statusFile))) {
                 continue;
@@ -212,7 +202,7 @@ class Monitor
             if (preg_match('/VmRSS\s*?:\s*?(\d+?)\s*?kB/', $status, $match)) {
                 $mem = $match[1];
             }
-            $mem = (int)($mem / 1024);
+            $mem = (int) ($mem / 1024);
             if ($mem >= $memoryLimit) {
                 posix_kill($pid, SIGINT);
             }
@@ -220,7 +210,7 @@ class Monitor
     }
 
     /**
-     * Get memory limit
+     * Get memory limit.
      * @return float
      */
     protected function getMemoryLimit($memoryLimit)
@@ -234,25 +224,26 @@ class Monitor
             $usePhpIni = true;
         }
 
-        if ($memoryLimit == -1) {
+        if ($memoryLimit === -1) {
             return 0;
         }
         $unit = strtolower($memoryLimit[strlen($memoryLimit) - 1]);
         if ($unit === 'g') {
-            $memoryLimit = 1024 * (int)$memoryLimit;
-        } else if ($unit === 'm') {
-            $memoryLimit = (int)$memoryLimit;
-        } else if ($unit === 'k') {
-            $memoryLimit = ((int)$memoryLimit / 1024);
+            $memoryLimit = 1024 * (int) $memoryLimit;
+        } elseif ($unit === 'm') {
+            $memoryLimit = (int) $memoryLimit;
+        } elseif ($unit === 'k') {
+            $memoryLimit = ((int) $memoryLimit / 1024);
         } else {
-            $memoryLimit = ((int)$memoryLimit / (1024 * 1024));
+            $memoryLimit = ((int) $memoryLimit / (1024 * 1024));
         }
         if ($memoryLimit < 30) {
             $memoryLimit = 30;
         }
         if ($usePhpIni) {
-            $memoryLimit = (int)(0.8 * $memoryLimit);
+            $memoryLimit = (int) (0.8 * $memoryLimit);
         }
+
         return $memoryLimit;
     }
 }

@@ -9,16 +9,15 @@ use DI\Attribute\Inject;
 #[Service]
 class IndexServiceImpl implements IndexService
 {
-    #[Inject("TEST_DATA")]
+    #[Inject('TEST_DATA')]
     private string $data;
 
-    public function index(): array
+    public function index() : array
     {
         return [
             'code' => 200,
             'message' => 'success',
-            'data' => $this->data
+            'data' => $this->data,
         ];
     }
-
 }

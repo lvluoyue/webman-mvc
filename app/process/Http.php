@@ -22,18 +22,16 @@ use Workerman\Connection\TcpConnection;
 
 class Http extends App
 {
-
     /**
      * OnWorkerStart.
-     * @param $worker
      * @return void
      */
     public function onWorkerStart($worker)
     {
-        $appName = env("SERVER_APP_NAME", "webman");
+        $appName = env('SERVER_APP_NAME', 'webman');
         $lockFile = runtime_path("windows/start_$appName.php");
-        if(env('SERVER_OPEN_BROWSER', false) && DIRECTORY_SEPARATOR !== '/' && time() - filemtime($lockFile) <= 3) {
-            exec('start http://127.0.0.1:' .  env('SERVER_APP_PROT', 8787));
+        if (env('SERVER_OPEN_BROWSER', false) && \DIRECTORY_SEPARATOR !== '/' && time() - filemtime($lockFile) <= 3) {
+            exec('start http://127.0.0.1:' . env('SERVER_APP_PROT', 8787));
         }
         parent::onWorkerStart($worker);
     }
@@ -49,6 +47,7 @@ class Http extends App
     {
         parent::onMessage($connection, $request);
     }
+
     /**
      * Send.
      * @param TcpConnection|mixed $connection
@@ -58,18 +57,15 @@ class Http extends App
      */
     protected static function send($connection, $response, $request)
     {
-//        print_r(Context::get());
+        //        print_r(Context::get());
         parent::send($connection, $response, $request);
     }
 
     /**
      * Check whether inject is required.
-     * @param $call
-     * @param array $args
-     * @return bool
      * @throws ReflectionException
      */
-    protected static function isNeedInject($call, array &$args): bool
+    protected static function isNeedInject($call, array &$args) : bool
     {
         if (is_array($call) && !method_exists($call[0], $call[1])) {
             return false;
@@ -86,7 +82,7 @@ class Http extends App
         $needInject = false;
         foreach ($reflectionParameters as $parameter) {
             foreach ($parameter->getAttributes() as $attribute) {
-                if($attribute->getName() == Inject::class) {
+                if ($attribute->getName() === Inject::class) {
                     $needInject = true;
                 }
             }
@@ -94,7 +90,7 @@ class Http extends App
             $keys[] = $parameterName;
             if ($parameter->hasType()) {
                 $typeName = $parameter->getType()->getName();
-                if (!in_array($typeName, $adaptersList)) {
+                if (!in_array($typeName, $adaptersList, true)) {
                     $needInject = true;
                     continue;
                 }
@@ -108,17 +104,17 @@ class Http extends App
                         if (!is_numeric($args[$parameterName])) {
                             return true;
                         }
-                        $args[$parameterName] = $typeName === 'int' ? (int)$args[$parameterName]: (float)$args[$parameterName];
+                        $args[$parameterName] = $typeName === 'int' ? (int) $args[$parameterName] : (float) $args[$parameterName];
                         break;
                     case 'bool':
-                        $args[$parameterName] = (bool)$args[$parameterName];
+                        $args[$parameterName] = (bool) $args[$parameterName];
                         break;
                     case 'array':
                     case 'object':
                         if (!is_array($args[$parameterName])) {
                             return true;
                         }
-                        $args[$parameterName] = $typeName === 'array' ? $args[$parameterName] : (object)$args[$parameterName];
+                        $args[$parameterName] = $typeName === 'array' ? $args[$parameterName] : (object) $args[$parameterName];
                         break;
                     case 'string':
                     case 'mixed':
@@ -141,16 +137,11 @@ class Http extends App
     }
 
     /**
-     * Return dependent parameters
-     * @param ContainerInterface $container
-     * @param Request $request
-     * @param array $inputs
-     * @param ReflectionFunctionAbstract $reflector
-     * @return array
+     * Return dependent parameters.
      * @throws BusinessException
      * @throws ReflectionException
      */
-    protected static function resolveMethodDependencies(ContainerInterface $container, Request $request, array $inputs, ReflectionFunctionAbstract $reflector, bool $debug): array
+    protected static function resolveMethodDependencies(ContainerInterface $container, Request $request, array $inputs, ReflectionFunctionAbstract $reflector, bool $debug) : array
     {
         $parameters = [];
         foreach ($reflector->getParameters() as $parameter) {
@@ -160,8 +151,8 @@ class Http extends App
 
             // 注入
             foreach ($parameter->getAttributes() as $attribute) {
-                if($attribute->getName() == Inject::class) {
-                    if(empty($attribute->getArguments())) {
+                if ($attribute->getName() === Inject::class) {
+                    if (empty($attribute->getArguments())) {
                         throw (new MissingInputException())->data([
                             'parameter' => $parameterName,
                         ])->debug($debug);
@@ -201,10 +192,10 @@ class Http extends App
                             'actualType' => gettype($parameterValue),
                         ])->debug($debug);
                     }
-                    $parameters[$parameterName] = $typeName === 'float' ? (float)$parameterValue :  (int)$parameterValue;
+                    $parameters[$parameterName] = $typeName === 'float' ? (float) $parameterValue : (int) $parameterValue;
                     break;
                 case 'bool':
-                    $parameters[$parameterName] = (bool)$parameterValue;
+                    $parameters[$parameterName] = (bool) $parameterValue;
                     break;
                 case 'array':
                 case 'object':
@@ -215,7 +206,7 @@ class Http extends App
                             'actualType' => gettype($parameterValue),
                         ])->debug($debug);
                     }
-                    $parameters[$parameterName] = $typeName === 'object' ? (object)$parameterValue : $parameterValue;
+                    $parameters[$parameterName] = $typeName === 'object' ? (object) $parameterValue : $parameterValue;
                     break;
                 case 'string':
                 case 'mixed':
@@ -228,7 +219,7 @@ class Http extends App
                     if (is_a($typeName, Model::class, true) || is_a($typeName, ThinkModel::class, true)) {
                         $parameters[$parameterName] = $container->make($typeName, [
                             'attributes' => $subInputs,
-                            'data' => $subInputs
+                            'data' => $subInputs,
                         ]);
                         break;
                     }
@@ -239,7 +230,7 @@ class Http extends App
                             break;
                         } elseif ($reflection->isBacked()) {
                             foreach ($reflection->getCases() as $case) {
-                                if ($case->getValue()->value == $parameterValue) {
+                                if ($case->getValue()->value === $parameterValue) {
                                     $parameters[$parameterName] = $case->getValue();
                                     break;
                                 }
@@ -248,7 +239,7 @@ class Http extends App
                         if (!array_key_exists($parameterName, $parameters)) {
                             throw (new InputValueException())->data([
                                 'parameter' => $parameterName,
-                                'enum' => $typeName
+                                'enum' => $typeName,
                             ])->debug($debug);
                         }
                         break;
@@ -261,7 +252,7 @@ class Http extends App
                     break;
             }
         }
+
         return $parameters;
     }
-
 }
