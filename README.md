@@ -5,6 +5,12 @@
 
  > webman-mvc 是一个基于 webman 的 mvc 框架，使用composer现有的生态开发，代码规范参考了java的spring框架，开发环境推荐使用 phpstorm 开发。
 
+<p align="center">
+<a href="LICENSE"><img src="https://img.shields.io/packagist/l/luoyue/webman-mvc" alt="Software License"></img></a>
+<a href="https://packagist.org/packages/luoyue/webman-mvc"><img src="https://img.shields.io/packagist/dt/luoyue/webman-mvc.svg?style=flat-square" alt="Total Downloads"></img></a>
+<a href="https://github.com/luoyue/webman-mvc/releases"><img src="https://img.shields.io/github/release/luoyue/webman-mvc.svg?style=flat-square" alt="Latest Version"></img></a>
+</p>
+
 ## 特性
   - 支持env配置（[vlucas/phpdotenv](https://github.com/vlucas/phpdotenv)）
   - 支持协程开发（[workbunny/webman-coroutine](https://github.com/workbunny/webman-coroutine)）
