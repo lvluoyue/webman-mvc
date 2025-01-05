@@ -29,7 +29,7 @@ jobs:
             tools: composer:v2
             coverage: none
             # Enable apcu
-            extensions: apcu
+            extensions: apcu, swoole
             ini-values: apc.enable_cli=1
       -   name: Cache Composer dependencies
           uses: actions/cache@v4
@@ -44,7 +44,7 @@ jobs:
       -   name: Install PHP dependenciess
           run: composer update --no-dev --no-interaction
       -   name: Run dependencies
-          run: php start.php start -d
+          run: php -d extension=swoole start.php start -d
 
   cs:
     name: Coding standards
