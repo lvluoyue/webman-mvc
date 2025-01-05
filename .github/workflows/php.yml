@@ -43,7 +43,7 @@ jobs:
           run: vendor/bin/phpunit
       -   name: dependencies
           run:
-            composer install --no-dev
+            composer update --no-dev --no-interaction
             php start.php start -d
 
   cs:
