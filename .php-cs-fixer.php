@@ -2,7 +2,7 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->in('./app')
-    ->notPath('./process');
+    ->notPath('process');
 $config = new PhpCsFixer\Config;
 
 return $config->setRules([
