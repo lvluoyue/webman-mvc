@@ -41,10 +41,10 @@ jobs:
           run: composer update ${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-progress
       -   name: PHPUnit
           run: vendor/bin/phpunit
-      -   name: dependencies
-          run:
-            composer update --no-dev --no-interaction
-            php start.php start -d
+      -   name: Install PHP dependenciess
+          run: composer update --no-dev --no-interaction
+      -   name: Run dependencies
+          run: php start.php start -d
 
   cs:
     name: Coding standards
