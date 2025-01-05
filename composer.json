@@ -61,7 +61,7 @@
       "App\\": "./app",
       "app\\View\\Components\\": "./app/view/components"
     }
-  },,
+  },
   "scripts": {
     "post-package-install": [
       "support\\Plugin::install"
