@@ -16,6 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        path: /opt
     - name: Composer install and PHPUnit testing
       uses: docker://luoyueapi/webman-mvc
       with:
