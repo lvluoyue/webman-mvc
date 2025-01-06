@@ -39,10 +39,11 @@ jobs:
             restore-keys: php-${{ matrix.php }}-composer-locked-
       -   name: Install PHP dependencies
           run: composer update ${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-progress
+      -   name: PHPUnit
+          run: vendor/bin/phpunit
       -   name: Run tests and collect coverage
           run: vendor/bin/phpunit --coverage-clover=coverage.xml
       -   name: Upload coverage to Codecov
-          if: ${{ matrix.dependency-version == '--prefer-lowest' }}
           uses: codecov/codecov-action@v5
           env:
             CODECOV_TOKEN: ${{ secrets.CODECOV_ORG_TOKEN }}
