@@ -399,7 +399,7 @@ class IndexServiceImpl implements IndexService
 
 例如我们可以使用上下文保存当前用户信息，并在任意类中获取信息。
 
-首先编写控制器
+首先编写拦截器
 ```php
 <?php
 
