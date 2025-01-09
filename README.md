@@ -177,8 +177,8 @@ cp .env.example .env
 - 注解使用的是[linfly/annotation](https://github.com/imlinfly/webman-annotation),官方文档仅适用于1.x版本，仅供参考。
 - 控制器的文件名的后缀在webman中是需要与配置文件`SERVER_APP_CONTROLLER_SUFFIX`保持一致，但使用注解模式时，则不需要。 不过为了项目规范，建议使用控制器后缀。
 ### 控制器注解
-- 控制器类必须包含`#[Controller]`注解，如：`#[Controller("/api")]`
-- 方法必须包含方法注解, 如：`#[GetMapping("index")]`
+- 控制器类必须包含`#[Controller]`注解，如：`#[Controller("/api")]`。
+- 方法必须包含方法注解, 如：`#[GetMapping("index")]`。
 - 示例:在`app/controller`中新建文件`TestController.php`如下代码
 ```php
 <?php
@@ -231,12 +231,12 @@ class TestController
 ### 方法路由注解
 - 可使用的注解: `RequestMapping`, `GetMapping`, `PostMapping`, `PutMapping`, `DeleteMapping`, `PatchMapping`, `HeadMapping`, `OptionsMapping`
 - 关于路径参数:
-   - `#[RequestMapping]`, 不带参数，则使用方法名作为路由地址
-   - `#[RequestMapping("")]`, 则使用控制器前缀作为路由器地址~~~~
-   - `#[RequestMapping("/api")]`: 使用根路径，如`/api`
-   - `#[RequestMapping("api")]`: 使用控制器前缀+路径参数，如`#[Controller("/test")]`注解路径为`/test/api`
-   - `#[RequestMapping("/api/{id}")]`: 使用路由参数，如`/api/abc`
-   - `#[RequestMapping("/api/{id:\d+}")]`: 使用正则表达式约束路由参数，如`/api/123`
+   - `#[RequestMapping]`, 不带参数，则使用方法名作为路由地址。
+   - `#[RequestMapping("")]`, 则使用控制器前缀作为路由器地址。
+   - `#[RequestMapping("/api")]`: 使用根路径，如`/api`。
+   - `#[RequestMapping("api")]`: 使用控制器前缀+路径参数，如`#[Controller("/test")]`注解路径为`/test/api`。
+   - `#[RequestMapping("/api/{id}")]`: 使用路由参数，如`/api/abc`。
+   - `#[RequestMapping("/api/{id:\d+}")]`: 使用正则表达式约束路由参数，如`/api/123`。
 
 ### 中间件注解
 - `#[Middleware]`注解可作用在类和方法上，在类上注解则作用在类中的所有方法上，在方法上注解则作用在当前方法上。
@@ -392,6 +392,146 @@ class IndexServiceImpl implements IndexService
 }
 ```
 
+
 ## 面向切面编程（AOP）
-- 相关文档:[lvwebman/webman-aop](https://github.com/lvluoyue/webman-aop)
+- 相关文档:[lvwebman/webman-aop](https://github.com/lvluoyue/webman-aop)。
 - 此功能正在开发中，请勿在生产环境中使用。
+
+
+## 协程开发
+> 推荐使用linux环境或docker环境下开发，在windows环境下可能会出问题。
+
+示例1（利用协程实现SSE）：
+```php
+
+    public function sse(): Response
+    {
+        $connection = request()->connection;
+        $waitGroup = new WaitGroup();
+        $waitGroup->add(30);
+        for ($i = 0; $i < $waitGroup->count(); $i++) {
+            /** @var Coroutine[] $coroutine */
+            $coroutine[$i] = new Coroutine(function () use ($waitGroup, $connection, $i, &$coroutine) {
+                sleep(0.1 * $i);
+                $connection->send(new ServerSentEvents([
+                    'event' => 'message',
+                    'data' => 'hello' . $i,
+                    'id' => $i
+                ]));
+                $waitGroup->done();
+            });
+        }
+
+        $timeOne = microtime(true);
+        //设置定时器
+        $timer_id = Timer::add(1, function () use ($connection, $waitGroup, &$timer_id, $timeOne, &$coroutine) {
+            // 发送完毕，断开客户端的tcp连接
+            if ($waitGroup->count() == 0) {
+                Timer::del($timer_id);
+                $connection->close(new ServerSentEvents([
+                    'event' => 'close',
+                    'data' => 'close',
+                    'id' => 0
+                ]));
+                $timeTwo = microtime(true);
+                echo '[协程] [运行时间] ' . ($timeTwo - $timeOne) . PHP_EOL;
+            }
+        });
+
+        //tcp关闭连接后立刻停止协程
+        $connection->onClose = function () use ($timer_id, &$coroutine) {
+            Timer::del($timer_id);
+            foreach ($coroutine as $weakMap) {
+                print_r($weakMap->origin());
+                $weakMap->kill($weakMap);
+            }
+//            foreach ($weakMap->getCoroutinesWeakMap()->getIterator() as $value) {
+//                [$seconds, $microseconds] = explode('.', $value['startTime']);
+//                echo '[协程] [' . $value['id'] . '] ' . date('Y-m-d H:i:s', $seconds) . ' ' . $microseconds . PHP_EOL;
+//            }
+        };
+
+        return response("\r\n")->withHeaders([
+            "Content-Type" => "text/event-stream",
+        ]);
+    }
+```
+示例2（利用协程实现Chunked）：
+```php
+
+    public function chunked(): Response
+    {
+        $connection = request()->connection;
+        $waitGroup = new WaitGroup();
+        $waitGroup->add(30);
+        for ($i = 0; $i < $waitGroup->count(); $i++) {
+            $coroutine = new Coroutine(function () use ($waitGroup, $connection, $i) {
+                sleep(0.1 * $i);
+                $connection->send(new Chunk($i . " "));
+                $waitGroup->done();
+            });
+        }
+
+        $timeOne = microtime(true);
+        //设置定时器
+        $timer_id = Timer::add(1, function () use ($connection, $waitGroup, &$timer_id, $timeOne) {
+            // 发送完毕，断开客户端的tcp连接
+            if ($waitGroup->count() == 0) {
+                Timer::del($timer_id);
+                $connection->close(new Chunk(''));
+                $timeTwo = microtime(true);
+                echo '[协程] [运行时间] ' . ($timeTwo - $timeOne) . PHP_EOL;
+            }
+        });
+
+
+        //tcp关闭连接后立刻停止协程
+        $connection->onClose = function () use ($timer_id, &$coroutine) {
+            Timer::del($timer_id);
+            foreach ($coroutine as $weakMap) {
+                $weakMap->kill($weakMap);
+            }
+        };
+
+        return response()->withHeaders([
+            "Transfer-Encoding" => "chunked",
+            "Content-Type" => "application/octet-stream" //二进制流
+        ]);
+    }
+
+```
+
+- 更多使用方式请查看相关文档[workbunny/webman-coroutine](https://github.com/workbunny/webman-coroutine)。
+
+## 单元测试（PHPUnit）
+以测试配置文件为例，首先在项目根目录下创建`tests`目录，然后创建测试类，代码如下：
+```php
+<?php
+
+namespace tests;
+
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\TestCase;
+
+class TestConfigTest extends TestCase
+{
+    #[Test]
+    public function testAppConfig()
+    {
+        $config = config('app');
+        self::assertIsArray($config); // 断言是否为数组
+        self::assertArrayHasKey('debug', $config); // 断言数组中是否存在键名debug
+        self::assertIsBool($config['debug']); // 断言键值是否为布尔值
+        self::assertArrayHasKey('default_timezone', $config); // 断言数组中是否存在键
+        self::assertIsString($config['default_timezone']); // 断言键值是否为字符串
+    }
+}
+```
+然后执行 `php vendor/bin/phpunit` 命令即可执行测试。
+ 
+单元测试配置文件在`phpunit.xml`中，请自行更改。
+
+更多用法请查看[相关文档](https://docs.phpunit.de/en/11.5/)。
+
+## 使用webman命令行插件
+- 其他用法请查看更多[相关文档](https://www.workerman.net/doc/webman/plugin/console.html)。
