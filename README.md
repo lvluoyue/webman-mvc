@@ -41,6 +41,7 @@
   ```
 ### 二进制启动
 - 请移步至相关[项目仓库](https://github.com/walkor/static-php-cli)查看。
+- [自动安装PHP+composer环境](https://www.workerman.net/download)（二进制版）
 ### docker环境
 - 使用官方镜像
   ```shell
@@ -391,6 +392,48 @@ class IndexServiceImpl implements IndexService
 
 }
 ```
+
+
+## 上下文处理
+> 上下文是webman框架中用于存储和获取当前请求的数据信息，如存储当前请求的request等。请求完成后框架会自动销毁上下文。
+
+例如我们可以使用上下文保存当前用户信息，并在任意类中获取信息。
+
+首先编写控制器
+```php
+<?php
+
+namespace app\middleware;
+
+use Webman\Context;
+use Webman\Http\Request;
+use Webman\Http\Response;
+use Webman\MiddlewareInterface;
+
+class TestContext implements MiddlewareInterface
+{
+
+    public function process(Request $request, callable $handler): Response
+    {
+        Context::set('userInfo', [
+            'id' => 1,
+            'name' => "落月",
+        ]);
+        return $handler($request);
+    }
+}
+```
+然后编写控制器
+```php
+    #[GetMapping]
+    #[Middleware(TestContext::class)]
+    public function test(Request $request): Response
+    {
+        return json(Context::get('userInfo'));
+    }
+```
+
+访问/test，输出：`{"id": 1,"name": "落月"}`
 
 
 ## 面向切面编程（AOP）
