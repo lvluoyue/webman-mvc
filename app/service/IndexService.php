@@ -4,5 +4,5 @@ namespace app\service;
 
 interface IndexService
 {
-    public function index() : array;
+    public function index(): array;
 }

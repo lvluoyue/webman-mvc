@@ -10,7 +10,7 @@ class Handler extends \support\exception\Handler
     /**
      * @param Throwable $exception
      */
-    public function render(Request $request, \Throwable $exception) : Response
+    public function render(Request $request, \Throwable $exception): Response
     {
         if (method_exists($exception, 'render') && ($response = $exception->render($request))) {
             return $response;

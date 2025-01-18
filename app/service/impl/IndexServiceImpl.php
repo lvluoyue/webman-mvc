@@ -12,7 +12,7 @@ class IndexServiceImpl implements IndexService
     #[Inject('TEST_DATA')]
     private string $data;
 
-    public function index() : array
+    public function index(): array
     {
         return [
             'code' => 200,

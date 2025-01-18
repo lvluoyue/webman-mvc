@@ -24,7 +24,7 @@ use Webman\MiddlewareInterface;
  */
 class StaticFile implements MiddlewareInterface
 {
-    public function process(Request $request, callable $next) : Response
+    public function process(Request $request, callable $next): Response
     {
         // Access to files beginning with. Is prohibited
         if (str_contains($request->path(), '/.')) {

@@ -45,9 +45,6 @@ return $config->setRules([
     'phpdoc_var_without_name' => true,
     'pow_to_exponentiation' => true,
     'unary_operator_spaces' => false,
-    'return_type_declaration' => [
-        'space_before' => 'one',
-    ],
     'semicolon_after_instruction' => true,
     'strict_comparison' => true,
     'strict_param' => true,
