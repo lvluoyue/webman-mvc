@@ -11,11 +11,10 @@ class ServiceParser implements IAnnotationParser
     public static function process(array $item): void
     {
         $reflectionClass = new ReflectionClass($item['class']);
-        $class = Container::get($item['class']);
         if ($name = $item['parameters']['name']) {
-            self::addContainer($name, $class);
+            self::addContainer($name, $item['class']);
         } else {
-            array_map(fn (string $interface) => self::addContainer($interface, $class), $reflectionClass->getInterfaceNames());
+            array_map(fn (string $interface) => self::addContainer($interface, $item['class']), $reflectionClass->getInterfaceNames());
         }
     }
 
@@ -23,9 +22,9 @@ class ServiceParser implements IAnnotationParser
     {
         $container = Container::instance();
         if ($container instanceof \Webman\Container) {
-            $container->addDefinitions([$key => $value]);
+            $container->addDefinitions([$key => $container->get($value)]);
         } elseif ($container instanceof \DI\Container) {
-            $container->set($key, $value);
+            $container->set($key, \DI\get($value));
         }
     }
 }

@@ -393,6 +393,51 @@ class IndexServiceImpl implements IndexService
 }
 ```
 
+## Bean注解
+> Bean注解用于在容器中注册第三方对象，bean可以是任何类型，如类、闭包、对象等。
+
+例如我们需要使用第三方邮件库，实例化对象时需要传入参数，此时我们可以使用Bean注解。
+```php
+<?php
+
+namespace app\utils;
+
+use app\annotation\Bean;
+use Psr\Container\ContainerInterface;
+
+class test
+{
+    #[Bean]
+    public function test(ContainerInterface $c): \SplFileInfo
+    {
+        echo '初始化操作';
+        return new \SplFileInfo('/'); //以SplFileInfo为例
+    }
+}
+```
+然后在service中使用Inject注解即可。
+```php
+<?php
+
+namespace app\service\impl;
+
+use app\service\IndexService;
+use DI\Attribute\Inject;
+use support\Container;
+
+#[Service]
+class IndexServiceImpl implements IndexService
+{
+    #[Inject('SplFileInfo')]
+    private \SplFileInfo $test;
+
+    public function index(): \SplFileInfo
+    {
+        return $this->test;
+    }
+}
+```
+
 
 ## 上下文处理
 > 上下文是webman框架中用于存储和获取当前请求的数据信息，如存储当前请求的request等。请求完成后框架会自动销毁上下文。
