@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3314014deb2b72e3840a2fb33b2fb00a",
+    "content-hash": "f0f36edfe3ebc157fd14cb36df4a68e4",
     "packages": [
         {
             "name": "brick/math",
@@ -1039,16 +1039,16 @@
         },
         {
             "name": "luoyue/webman-aop",
-            "version": "1.1.3",
+            "version": "1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lvluoyue/webman-aop.git",
-                "reference": "d679f02351f4bc1fd8dc756b4d66fb0f47bbff37"
+                "reference": "86d24eb60bb67674bd4ab5cad5503f8098955ccb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lvluoyue/webman-aop/zipball/d679f02351f4bc1fd8dc756b4d66fb0f47bbff37",
-                "reference": "d679f02351f4bc1fd8dc756b4d66fb0f47bbff37",
+                "url": "https://api.github.com/repos/lvluoyue/webman-aop/zipball/86d24eb60bb67674bd4ab5cad5503f8098955ccb",
+                "reference": "86d24eb60bb67674bd4ab5cad5503f8098955ccb",
                 "shasum": ""
             },
             "require": {
@@ -1082,9 +1082,9 @@
                 "切片"
             ],
             "support": {
-                "source": "https://github.com/lvluoyue/webman-aop/tree/1.1.3"
+                "source": "https://github.com/lvluoyue/webman-aop/tree/1.1.5"
             },
-            "time": "2025-01-04T14:21:55+00:00"
+            "time": "2025-01-13T06:02:43+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3505,17 +3505,48 @@
             "time": "2025-01-07T06:44:45+00:00"
         },
         {
-            "name": "webman/log",
-            "version": "v1.2.0",
+            "name": "webman/event",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webman-php/log.git",
-                "reference": "6a534e5f25074e41c107cc3643f3aad9fcf09298"
+                "url": "https://github.com/webman-php/event.git",
+                "reference": "b1c3f6b70fd290e48288703d59bead0e28f9fb84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webman-php/log/zipball/6a534e5f25074e41c107cc3643f3aad9fcf09298",
-                "reference": "6a534e5f25074e41c107cc3643f3aad9fcf09298",
+                "url": "https://api.github.com/repos/webman-php/event/zipball/b1c3f6b70fd290e48288703d59bead0e28f9fb84",
+                "reference": "b1c3f6b70fd290e48288703d59bead0e28f9fb84",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Webman\\Event\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Webman event plugin",
+            "support": {
+                "issues": "https://github.com/webman-php/event/issues",
+                "source": "https://github.com/webman-php/event/tree/v1.0.5"
+            },
+            "time": "2023-12-04T09:22:12+00:00"
+        },
+        {
+            "name": "webman/log",
+            "version": "v1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webman-php/log.git",
+                "reference": "7c2f1c7d032a7a5d3d876da7b9b1145032e11eee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webman-php/log/zipball/7c2f1c7d032a7a5d3d876da7b9b1145032e11eee",
+                "reference": "7c2f1c7d032a7a5d3d876da7b9b1145032e11eee",
                 "shasum": ""
             },
             "require": {
@@ -3534,9 +3565,9 @@
             "description": "Webman plugin webman/log",
             "support": {
                 "issues": "https://github.com/webman-php/log/issues",
-                "source": "https://github.com/webman-php/log/tree/v1.2.0"
+                "source": "https://github.com/webman-php/log/tree/v1.2.1"
             },
-            "time": "2024-10-25T02:23:03+00:00"
+            "time": "2025-01-10T08:39:44+00:00"
         },
         {
             "name": "workbunny/webman-coroutine",
@@ -4142,16 +4173,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.67.0",
+            "version": "v3.68.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "0ad34c75d1172f7d30320460e803887981830cbf"
+                "reference": "73f78d8b2b34a0dd65fedb434a602ee4c2c8ad4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/0ad34c75d1172f7d30320460e803887981830cbf",
-                "reference": "0ad34c75d1172f7d30320460e803887981830cbf",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/73f78d8b2b34a0dd65fedb434a602ee4c2c8ad4c",
+                "reference": "73f78d8b2b34a0dd65fedb434a602ee4c2c8ad4c",
                 "shasum": ""
             },
             "require": {
@@ -4233,7 +4264,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.67.0"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.68.0"
             },
             "funding": [
                 {
@@ -4241,7 +4272,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-08T10:17:40+00:00"
+            "time": "2025-01-13T17:01:01+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -4746,16 +4777,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.5.2",
+            "version": "11.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "153d0531b9f7e883c5053160cad6dd5ac28140b3"
+                "reference": "30e319e578a7b5da3543073e30002bf82042f701"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/153d0531b9f7e883c5053160cad6dd5ac28140b3",
-                "reference": "153d0531b9f7e883c5053160cad6dd5ac28140b3",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/30e319e578a7b5da3543073e30002bf82042f701",
+                "reference": "30e319e578a7b5da3543073e30002bf82042f701",
                 "shasum": ""
             },
             "require": {
@@ -4776,7 +4807,7 @@
                 "phpunit/php-timer": "^7.0.1",
                 "sebastian/cli-parser": "^3.0.2",
                 "sebastian/code-unit": "^3.0.2",
-                "sebastian/comparator": "^6.2.1",
+                "sebastian/comparator": "^6.3.0",
                 "sebastian/diff": "^6.0.2",
                 "sebastian/environment": "^7.2.0",
                 "sebastian/exporter": "^6.3.0",
@@ -4827,7 +4858,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.2"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.3"
             },
             "funding": [
                 {
@@ -4843,7 +4874,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-21T05:51:08+00:00"
+            "time": "2025-01-13T09:36:00+00:00"
         },
         {
             "name": "psr/event-dispatcher",
