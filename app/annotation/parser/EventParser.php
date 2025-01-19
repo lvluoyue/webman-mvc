@@ -19,7 +19,7 @@ class EventParser implements IAnnotationParser
     {
         foreach (static::$events as $name => $events) {
             // 支持排序，1 2 3 ... 9 a b c...z
-            ksort($events, SORT_NATURAL);
+            ksort($events, \SORT_NATURAL);
             foreach ($events as $callbacks) {
                 foreach ($callbacks as $callback) {
                     Event::on($name, $callback);
