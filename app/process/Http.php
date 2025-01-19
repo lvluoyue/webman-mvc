@@ -2,6 +2,7 @@
 
 namespace app\process;
 
+use app\annotation\parser\EventParser;
 use DI\Attribute\Inject;
 use Illuminate\Database\Eloquent\Model;
 use think\Model as ThinkModel;
@@ -32,6 +33,7 @@ class Http extends App
             exec('start http://127.0.0.1:' . env('SERVER_APP_PROT', 8787));
         }
         parent::onWorkerStart($worker);
+        EventParser::EventHandler();
     }
 
     /**

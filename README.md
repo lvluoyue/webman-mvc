@@ -431,11 +431,54 @@ class IndexServiceImpl implements IndexService
     #[Inject('SplFileInfo')]
     private \SplFileInfo $test;
 
-    public function index(): \SplFileInfo
+    public function index(): void
     {
-        return $this->test;
+        print_r($this->test);
     }
 }
+```
+
+## Event事件
+> 使用前请查看[相关文档](https://www.workerman.net/doc/webman/components/event.html)
+
+本项目可使用注解来实现注册事件。
+```php
+<?php
+
+namespace app\event;
+
+use \app\annotation\Event;
+
+class User
+{
+    #[Event('user.register')]
+    function register($user)
+    {
+        var_export($user);
+    }
+
+    #[Event('user.logout')]
+    function logout($user)
+    {
+        var_export($user);
+    }
+}
+```
+
+注解效果与如下配置效果一致。
+
+```php
+<?php
+return [
+    'user.register' => [
+        [app\event\User::class, 'register'],
+        // ...其它事件处理函数...
+    ],
+    'user.logout' => [
+        [app\event\User::class, 'logout'],
+        // ...其它事件处理函数...
+    ]
+];
 ```
 
 
