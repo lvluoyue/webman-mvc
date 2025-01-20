@@ -28,6 +28,7 @@
     "workerman/workerman": "^v5.0.0",
     "workerman/webman-framework": "^1.6.8",
     "linfly/annotation": "^2.0.1",
+    "luoyue/webman-mvc-annotation-library": "^1.0",
     "workbunny/webman-coroutine": "^1.3",
     "luoyue/webman-aop": "^1.0",
     "webman/event": "^1.0",

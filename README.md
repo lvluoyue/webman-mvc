@@ -374,7 +374,7 @@ interface IndexService {
 <?php
 namespace app\service;
 
-use app\annotation\Service;
+use luoyue\WebmanMvcAnnotationLibrary\annotation\Service;
 use app\service\IndexService;
 
 #[Service]
@@ -402,7 +402,7 @@ class IndexServiceImpl implements IndexService
 
 namespace app\utils;
 
-use app\annotation\Bean;
+use luoyue\WebmanMvcAnnotationLibrary\annotation\Bean;
 use Psr\Container\ContainerInterface;
 
 class test
@@ -424,6 +424,7 @@ namespace app\service\impl;
 use app\service\IndexService;
 use DI\Attribute\Inject;
 use support\Container;
+use luoyue\WebmanMvcAnnotationLibrary\annotation\Service;
 
 #[Service]
 class IndexServiceImpl implements IndexService
@@ -447,7 +448,7 @@ class IndexServiceImpl implements IndexService
 
 namespace app\event;
 
-use \app\annotation\Event;
+use luoyue\WebmanMvcAnnotationLibrary\annotation\Event;
 
 class User
 {

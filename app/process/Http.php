@@ -2,9 +2,9 @@
 
 namespace app\process;
 
-use app\annotation\parser\EventParser;
 use DI\Attribute\Inject;
 use Illuminate\Database\Eloquent\Model;
+use luoyue\WebmanMvcAnnotationLibrary\annotation\parser\EventParser;
 use think\Model as ThinkModel;
 use Psr\Container\ContainerInterface;
 use ReflectionClass;

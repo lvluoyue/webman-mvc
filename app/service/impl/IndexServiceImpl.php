@@ -2,9 +2,9 @@
 
 namespace app\service\impl;
 
-use app\annotation\Service;
 use app\service\IndexService;
 use DI\Attribute\Inject;
+use luoyue\WebmanMvcAnnotationLibrary\annotation\Service;
 
 #[Service]
 class IndexServiceImpl implements IndexService
