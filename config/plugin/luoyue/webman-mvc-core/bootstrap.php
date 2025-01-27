@@ -13,5 +13,5 @@
  */
 
 return [
-    '@' => \Luoyue\WebmanMvcCore\handler\ExceptionHandler::class,
+    \Luoyue\WebmanMvcCore\MvcBootstrap::class
 ];

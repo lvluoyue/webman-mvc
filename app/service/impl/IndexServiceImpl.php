@@ -4,13 +4,13 @@ namespace app\service\impl;
 
 use app\service\IndexService;
 use DI\Attribute\Inject;
-use luoyue\WebmanMvcAnnotationLibrary\annotation\Service;
+use Luoyue\WebmanMvcCore\annotation\core\Service;
 
 #[Service]
 class IndexServiceImpl implements IndexService
 {
     #[Inject('TEST_DATA')]
-    private string $data;
+    private ?string $data;
 
     public function index(): array
     {
