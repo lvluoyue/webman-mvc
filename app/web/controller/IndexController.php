@@ -1,8 +1,8 @@
 <?php
 
-namespace app\controller;
+namespace app\web\controller;
 
-use app\service\IndexService;
+use app\web\service\IndexService;
 use DI\Attribute\Inject;
 use LinFly\Annotation\Attributes\Route\RequestMapping;
 use Luoyue\WebmanMvcCore\annotation\authorization\hasRole;

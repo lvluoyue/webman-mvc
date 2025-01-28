@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "900cb943ebc9534cba680cd6a7f5063a",
+    "content-hash": "8b7cda41f5a19ab923891040025ff47b",
     "packages": [
         {
             "name": "brick/math",
@@ -1376,13 +1376,15 @@
             "dist": {
                 "type": "path",
                 "url": "../webman-mvc-core",
-                "reference": "910d83234993d3efc799161c0ccd9284548d92e6"
+                "reference": "37d63708bb466d2b428e1d3ed622cbaa4985d669"
             },
             "require": {
                 "linfly/annotation": "^2.1",
                 "php": "^8.0"
             },
             "require-dev": {
+                "casbin/webman-permission": "^2.0",
+                "webman/event": "^1.0",
                 "workerman/webman-framework": "^1.6"
             },
             "type": "library",
