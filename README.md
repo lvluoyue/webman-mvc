@@ -340,11 +340,12 @@ class MessageParser implements iAnnotationParser
 ## 依赖注入
 - 相关文档:[php-di/php-di](https://github.com/PHP-DI/PHP-DI)，此项目使用`#[Inject]`注解即可。
 - 注解使用方式: `#[Inject]`注解可作用在`成员变量、成员方法、控制器方法`的形参上，在类上注解则作用在类中的所有方法上，在方法上注解则作用在当前方法上。
+
 ```php
 <?php
 namespace app\controller;
 
-use app\service\IndexService;
+use app\test\service\IndexService;
 use DI\Attribute\Inject;
 use LinFly\Annotation\Attributes\Route\RequestMapping;
 
@@ -375,7 +376,7 @@ interface IndexService {
 namespace app\service;
 
 use luoyue\WebmanMvcAnnotationLibrary\annotation\Service;
-use app\service\IndexService;
+use app\test\service\IndexService;
 
 #[Service]
 class IndexServiceImpl implements IndexService
@@ -416,12 +417,13 @@ class test
 }
 ```
 然后在service中使用Inject注解即可。
+
 ```php
 <?php
 
 namespace app\service\impl;
 
-use app\service\IndexService;
+use app\test\service\IndexService;
 use DI\Attribute\Inject;
 use support\Container;
 use luoyue\WebmanMvcAnnotationLibrary\annotation\Service;

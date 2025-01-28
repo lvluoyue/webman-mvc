@@ -4,7 +4,7 @@ namespace app\process;
 
 use DI\Attribute\Inject;
 use Illuminate\Database\Eloquent\Model;
-use luoyue\WebmanMvcAnnotationLibrary\annotation\parser\EventParser;
+use Luoyue\WebmanMvcCore\annotation\core\parser\EventParser;
 use think\Model as ThinkModel;
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
@@ -27,11 +27,6 @@ class Http extends App
      */
     public function onWorkerStart($worker)
     {
-        $appName = env('SERVER_APP_NAME', 'webman');
-        $lockFile = runtime_path("windows/start_$appName.php");
-        if (env('SERVER_OPEN_BROWSER', false) && \DIRECTORY_SEPARATOR !== '/' && time() - filemtime($lockFile) <= 3) {
-            exec('start http://127.0.0.1:' . env('SERVER_APP_PROT', 8787));
-        }
         parent::onWorkerStart($worker);
         class_exists(EventParser::class) && EventParser::EventHandler();
     }

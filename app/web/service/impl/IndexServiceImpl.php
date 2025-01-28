@@ -1,8 +1,8 @@
 <?php
 
-namespace app\service\impl;
+namespace app\web\service\impl;
 
-use app\service\IndexService;
+use app\web\service\IndexService;
 use DI\Attribute\Inject;
 use Luoyue\WebmanMvcCore\annotation\core\Service;
 
