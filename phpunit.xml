@@ -11,7 +11,7 @@
 
     <source>
         <include>
-            <directory suffix=".php">app/service</directory>
+            <directory suffix=".php">app/web</directory>
         </include>
     </source>
     <php>
