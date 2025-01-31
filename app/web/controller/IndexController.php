@@ -34,7 +34,7 @@ class IndexController
         if (!$this->sessionUserDetailsService->login($username, $password)) {
             return json(['code' => 201, 'msg' => '登录失败']);
         }
+
         return redirect('/');
     }
-
 }
