@@ -2,7 +2,7 @@
 
 namespace tests\controller;
 
-use app\test\service\IndexService;
+use app\web\service\IndexService;
 use DI\Attribute\Inject;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;

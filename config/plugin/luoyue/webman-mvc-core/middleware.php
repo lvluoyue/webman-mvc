@@ -2,7 +2,6 @@
 
 return [
     "@" => [
-        \Luoyue\WebmanMvcCore\middleware\HasRoleMiddleware::class,
-        \Luoyue\WebmanMvcCore\middleware\HasPermiMiddleware::class
+        \Luoyue\WebmanMvcCore\middleware\PermissionMiddleware::class,
     ]
 ];

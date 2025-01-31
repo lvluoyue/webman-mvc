@@ -44,6 +44,6 @@ class GlobalExceptionHandler
     #[ExceptionHandler(\Exception::class)]
     public function exceptionHandler(Request $request, \Throwable $exception): Response
     {
-        return json(['code' => 500, 'message' => $exception->getMessage(), 'exception_class' => get_class($exception)]);
+        return json(['code' => 500, 'message' => $exception->getMessage(), 'file' => $exception->getFile(), 'line' => $exception->getLine(), 'exception_class' => get_class($exception)]);
     }
 }
