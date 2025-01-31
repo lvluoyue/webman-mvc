@@ -13,5 +13,5 @@
  */
 
 return [
-    luoyue\aop\AopBootstrap::class,
+    Luoyue\aop\AopBootstrap::class,
 ];

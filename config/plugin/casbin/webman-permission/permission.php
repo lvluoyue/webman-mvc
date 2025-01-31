@@ -37,7 +37,8 @@ return [
             'config_file_path' => config_path() . '/plugin/casbin/webman-permission/restful-model.conf',
             'config_text' => '',
         ],
-        'adapter' => Casbin\WebmanPermission\Adapter\DatabaseAdapter::class, // ThinkORM 适配器
+//        'adapter' => Casbin\WebmanPermission\Adapter\DatabaseAdapter::class, // ThinkORM 适配器
+        'adapter' => Casbin\WebmanPermission\Adapter\LaravelDatabaseAdapter::class, // Laravel 适配器
         'database' => [
             'connection' => '',
             'rules_table' => 'restful_casbin_rule',
