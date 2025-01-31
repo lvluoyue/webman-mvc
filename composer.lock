@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4124af726f8bd2e3e3b7b58005b9c229",
+    "content-hash": "cab9bbd1030b8e7fcadfadcb6832404b",
     "packages": [
         {
             "name": "brick/math",
@@ -1374,11 +1374,17 @@
         },
         {
             "name": "luoyue/webman-mvc-core",
-            "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "../webman-mvc-core",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lvluoyue/webman-mvc-core.git",
                 "reference": "4b72c420c00a6ff7abd8dc9192ad9e1b0ac9694e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lvluoyue/webman-mvc-core/zipball/4b72c420c00a6ff7abd8dc9192ad9e1b0ac9694e",
+                "reference": "4b72c420c00a6ff7abd8dc9192ad9e1b0ac9694e",
+                "shasum": ""
             },
             "require": {
                 "linfly/annotation": "^2.1",
@@ -1395,6 +1401,7 @@
                     "Luoyue\\WebmanMvcCore\\": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1405,9 +1412,11 @@
                 }
             ],
             "description": "Webman plugin luoyue/webman-mvc-core",
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/lvluoyue/webman-mvc-core/issues",
+                "source": "https://github.com/lvluoyue/webman-mvc-core/tree/0.1.1"
+            },
+            "time": "2025-01-31T12:49:54+00:00"
         },
         {
             "name": "monolog/monolog",
