@@ -61,11 +61,13 @@ class IndexController
 
         return redirect('/');
     }
+
     #[GetMapping]
     #[Anonymous]
     public function logout()
     {
         $this->sessionUserDetailsService->logout();
+
         return redirect('/');
     }
 }

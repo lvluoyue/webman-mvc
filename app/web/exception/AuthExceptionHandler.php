@@ -49,7 +49,7 @@ class AuthExceptionHandler
     }
 
     /**
-     * 用户无权限
+     * 用户无权限.
      */
     #[ExceptionHandler(PermissionException::class, 'web')]
     public function exceptionHandler(Request $request, \Throwable $exception): Response
@@ -58,7 +58,7 @@ class AuthExceptionHandler
             <!DOCTYPE html>
             <html lang="en">
                 <body>
-                    <h3>{$exception->getMessage()}</h3>              
+                    <h3>{$exception->getMessage()}</h3>
                     <button type="submit" onclick="window.location.href='/logout'">logout</button>
             </body></html>
             HTML);
