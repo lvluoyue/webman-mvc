@@ -28,7 +28,7 @@ return [
             'unix_socket' => '',
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix' => '',
+            'prefix' => env('DATABASE_CONNECTIONS_MYSQL_PREFIX', ''),
             'strict' => true,
             'engine' => null,
             'options' => [
@@ -43,7 +43,7 @@ return [
             'username' => env('DATABASE_CONNECTIONS_PGSQL_USERNAME', 'root'),
             'password' => env('DATABASE_CONNECTIONS_PGSQL_PASSWORD', ''),
             'charset' => 'utf8',
-            'prefix' => '',
+            'prefix' => env('DATABASE_CONNECTIONS_PGSQL_PREFIX', ''),
             'schema' => env('DATABASE_CONNECTIONS_PGSQL_SCHEMA', 'public'),
             'sslmode' => 'prefer',
             'application_name' => env('SERVER_APP_NAME', 'webman'),
@@ -51,7 +51,7 @@ return [
         'sqlite' => [
             'driver' => 'sqlite',
             'database' => base_path(false) . env('DATABASE_CONNECTIONS_SQLITE_PATH', '/database.sqlite'),
-            'prefix' => '',
+            'prefix' => env('DATABASE_CONNECTIONS_SQLITE_PREFIX', ''),
         ],
     ],
 ];

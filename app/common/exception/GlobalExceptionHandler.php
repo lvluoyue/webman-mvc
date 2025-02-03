@@ -37,4 +37,12 @@ class GlobalExceptionHandler
     {
         return json(['code' => 500, 'message' => $exception->getMessage(), 'file' => $exception->getFile(), 'line' => $exception->getLine(), 'exception_class' => $exception::class]);
     }
+    /**
+     * 处理基于Error的异常(用于错误兜底).
+     */
+    #[ExceptionHandler(\Error::class)]
+    public function errorHandler(Request $request, \Throwable $exception): Response
+    {
+        return json(['code' => 502, 'message' => $exception->getMessage(), 'file' => $exception->getFile(), 'line' => $exception->getLine(), 'exception_class' => $exception::class]);
+    }
 }

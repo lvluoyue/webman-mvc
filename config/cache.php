@@ -13,7 +13,7 @@
  */
 
 return [
-    'default' => 'file',
+    'default' => env('CACHE_DEFAULT', 'file'),
     'stores' => [
         'file' => [
             'driver' => 'file',
@@ -21,7 +21,7 @@ return [
         ],
         'redis' => [
             'driver' => 'redis',
-            'connection' => 'default'
+            'connection' => 'cache'
         ],
         'array' => [
             'driver' => 'array'

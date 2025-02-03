@@ -14,10 +14,17 @@
 
 return [
     'default' => [
-        'host' => '127.0.0.1',
-        'password' => null,
-        'port' => 6379,
-        'database' => 0,
+        'host' => env("REDIS_HOST", '127.0.0.1'),
+        'password' => env("REDIS_PASSWORD", null),
+        'port' => env("REDIS_PORT", 6379),
+        'database' => env("REDIS_DATABASE"),
         'idle_timeout' => 55
+    ],
+    'cache' => [
+        'host' => env("CACHE_REDIS_HOST", '127.0.0.1'),
+        'password' => env("CACHE_REDIS_PASSWORD", null),
+        'port' => env("CACHE_REDIS_PORT", 6379),
+        'database' => env("CACHE_REDIS_DATABASE", 0),
+        'prefix' => env("CACHE_REDIS_PREFIX", 'webman_cache:'),
     ],
 ];

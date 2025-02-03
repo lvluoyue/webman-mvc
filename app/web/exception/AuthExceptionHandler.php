@@ -1,8 +1,9 @@
 <?php
 
-namespace app\common\exception;
+namespace app\web\exception;
 
 use Luoyue\WebmanMvcCore\annotation\exception\ExceptionHandler;
+use Luoyue\WebmanMvcCore\exception\PermissionException;
 use Luoyue\WebmanMvcCore\exception\UserException;
 use Webman\Http\Request;
 use Webman\Http\Response;
@@ -12,7 +13,7 @@ class AuthExceptionHandler
     /**
      * 用户未登录.
      */
-    #[ExceptionHandler(UserException::class)]
+    #[ExceptionHandler(UserException::class, 'web')]
     public function userExceptionHandler(Request $request, \Throwable $exception): Response
     {
         return response(<<<'HTML'
@@ -45,5 +46,21 @@ class AuthExceptionHandler
             </body></html>
             HTML);
         //        return json(['code' => 500, 'message' => '您当前未登录']);
+    }
+
+    /**
+     * 用户无权限
+     */
+    #[ExceptionHandler(PermissionException::class, 'web')]
+    public function exceptionHandler(Request $request, \Throwable $exception): Response
+    {
+        return response(<<<HTML
+            <!DOCTYPE html>
+            <html lang="en">
+                <body>
+                    <h3>{$exception->getMessage()}</h3>              
+                    <button type="submit" onclick="window.location.href='/logout'">logout</button>
+            </body></html>
+            HTML);
     }
 }

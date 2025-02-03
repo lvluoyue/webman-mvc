@@ -36,7 +36,7 @@ return [
             'auth' => env('SESSION_REDIS_PASSWORD', ''),
             'timeout' => 2,
             'database' => '',
-            'prefix' => 'redis_session_',
+            'prefix' => env('SESSION_REDIS_PREFIX', 'redis_session_'),
         ],
         'redis_cluster' => [
             'host' => ['127.0.0.1:7000', '127.0.0.1:7001', '127.0.0.1:7001'],
