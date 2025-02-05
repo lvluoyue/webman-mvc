@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "84ab81f933b83ba8e8d7d26f9e500926",
+    "content-hash": "4d24deae6ed01daf261d872643f26bde",
     "packages": [
         {
             "name": "brick/math",
@@ -1323,11 +1323,17 @@
         },
         {
             "name": "luoyue/webman-aop",
-            "version": "dev-main",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lvluoyue/webman-aop.git",
+                "reference": "5a2e5161d4ba275f15dbaa92ad8b0c2a4047c944"
+            },
             "dist": {
-                "type": "path",
-                "url": "../webman-aop",
-                "reference": "d771d169057a3fe19868b6d4dfa3edb3b24d6a78"
+                "type": "zip",
+                "url": "https://api.github.com/repos/lvluoyue/webman-aop/zipball/5a2e5161d4ba275f15dbaa92ad8b0c2a4047c944",
+                "reference": "5a2e5161d4ba275f15dbaa92ad8b0c2a4047c944",
+                "shasum": ""
             },
             "require": {
                 "linfly/annotation": "^2.1",
@@ -1345,6 +1351,7 @@
                     "Luoyue\\aop\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1360,17 +1367,24 @@
                 "aspect",
                 "切片"
             ],
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/lvluoyue/webman-aop/tree/2.0.1"
+            },
+            "time": "2025-02-02T08:34:08+00:00"
         },
         {
             "name": "luoyue/webman-mvc-core",
-            "version": "dev-master",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lvluoyue/webman-mvc-core.git",
+                "reference": "4b72c420c00a6ff7abd8dc9192ad9e1b0ac9694e"
+            },
             "dist": {
-                "type": "path",
-                "url": "../webman-mvc-core",
-                "reference": "95e132ef2d7ab9200c19ed0b4aabc5a20ad6d3ba"
+                "type": "zip",
+                "url": "https://api.github.com/repos/lvluoyue/webman-mvc-core/zipball/4b72c420c00a6ff7abd8dc9192ad9e1b0ac9694e",
+                "reference": "4b72c420c00a6ff7abd8dc9192ad9e1b0ac9694e",
+                "shasum": ""
             },
             "require": {
                 "linfly/annotation": "^2.1",
@@ -1378,9 +1392,6 @@
             },
             "require-dev": {
                 "casbin/webman-permission": "^2.0",
-                "illuminate/database": "^12.0@dev",
-                "luoyue/webman-aop": "^2.0||*",
-                "symfony/cache": "7.3.x-dev",
                 "webman/event": "^1.0",
                 "workerman/webman-framework": "^1.6"
             },
@@ -1390,6 +1401,7 @@
                     "Luoyue\\WebmanMvcCore\\": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1400,9 +1412,11 @@
                 }
             ],
             "description": "Webman plugin luoyue/webman-mvc-core",
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/lvluoyue/webman-mvc-core/issues",
+                "source": "https://github.com/lvluoyue/webman-mvc-core/tree/0.1.1"
+            },
+            "time": "2025-01-31T12:49:54+00:00"
         },
         {
             "name": "monolog/monolog",
