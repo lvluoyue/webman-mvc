@@ -22,7 +22,7 @@ class IndexControllerTest extends TestCase
     #[Test]
     public function index()
     {
-        $data = $this->controller->index();
+        $data = $this->controller->json();
         self::assertIsArray($data);
         self::assertArrayHasKey('data', $data);
         self::assertIsString($data['data'], 'data不是字符串');
