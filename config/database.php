@@ -32,8 +32,16 @@ return [
             'strict' => true,
             'engine' => null,
             'options' => [
-                //\PDO::ATTR_TIMEOUT => 3
-            ]
+                PDO::ATTR_EMULATE_PREPARES => false, // Must be false for Swoole and Swow drivers.
+            ],
+            // Connection pool, supports only Swoole or Swow drivers.
+            'pool' => [
+                'max_connections' => 5,
+                'min_connections' => 1,
+                'wait_timeout' => 3,
+                'idle_timeout' => 60,
+                'heartbeat_interval' => 50,
+            ],
         ],
         'pgsql' => [
             'driver' => 'pgsql',

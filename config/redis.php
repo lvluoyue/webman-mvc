@@ -18,13 +18,28 @@ return [
         'password' => env("REDIS_PASSWORD", null),
         'port' => env("REDIS_PORT", 6379),
         'database' => env("REDIS_DATABASE"),
-        'idle_timeout' => 55
+        // Connection pool, supports only Swoole or Swow drivers.
+        'pool' => [
+            'max_connections' => 5,
+            'min_connections' => 1,
+            'wait_timeout' => 3,
+            'idle_timeout' => 60,
+            'heartbeat_interval' => 50,
+        ],
     ],
     'cache' => [
         'host' => env("CACHE_REDIS_HOST", '127.0.0.1'),
         'password' => env("CACHE_REDIS_PASSWORD", null),
         'port' => env("CACHE_REDIS_PORT", 6379),
         'database' => env("CACHE_REDIS_DATABASE", 0),
-        'prefix' => env("CACHE_REDIS_PREFIX", 'webman_cache:'),
+        'prefix' => env("CACHE_REDIS_PREFIX", 'webman_cache_'),
+        // Connection pool, supports only Swoole or Swow drivers.
+        'pool' => [
+            'max_connections' => 5,
+            'min_connections' => 1,
+            'wait_timeout' => 3,
+            'idle_timeout' => 60,
+            'heartbeat_interval' => 50,
+        ],
     ],
 ];

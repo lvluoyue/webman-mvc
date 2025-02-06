@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4d24deae6ed01daf261d872643f26bde",
+    "content-hash": "7a64da582fd777142aaa3c13c611e221",
     "packages": [
         {
             "name": "brick/math",
@@ -1227,32 +1227,32 @@
         },
         {
             "name": "laravel/serializable-closure",
-            "version": "v1.3.7",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "4f48ade902b94323ca3be7646db16209ec76be3d"
+                "reference": "2e1a362527783bcab6c316aad51bf36c5513ae44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/4f48ade902b94323ca3be7646db16209ec76be3d",
-                "reference": "4f48ade902b94323ca3be7646db16209ec76be3d",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/2e1a362527783bcab6c316aad51bf36c5513ae44",
+                "reference": "2e1a362527783bcab6c316aad51bf36c5513ae44",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3|^8.0"
+                "php": "^8.1"
             },
             "require-dev": {
-                "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
-                "nesbot/carbon": "^2.61|^3.0",
-                "pestphp/pest": "^1.21.3",
-                "phpstan/phpstan": "^1.8.2",
-                "symfony/var-dumper": "^5.4.11|^6.2.0|^7.0.0"
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "nesbot/carbon": "^2.67|^3.0",
+                "pestphp/pest": "^2.36|^3.0",
+                "phpstan/phpstan": "^2.0",
+                "symfony/var-dumper": "^6.2.0|^7.0.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -1284,7 +1284,7 @@
                 "issues": "https://github.com/laravel/serializable-closure/issues",
                 "source": "https://github.com/laravel/serializable-closure"
             },
-            "time": "2024-11-14T18:34:49+00:00"
+            "time": "2025-01-24T15:42:37+00:00"
         },
         {
             "name": "linfly/annotation",
@@ -3944,6 +3944,43 @@
             "time": "2024-08-07T11:36:36+00:00"
         },
         {
+            "name": "webman/cache",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webman-php/cache.git",
+                "reference": "35cd8c1b3143fd792e2f50a7e6274292a122aed3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webman-php/cache/zipball/35cd8c1b3143fd792e2f50a7e6274292a122aed3",
+                "reference": "35cd8c1b3143fd792e2f50a7e6274292a122aed3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "psr/simple-cache": "^3.0",
+                "symfony/cache": "^6.0 || ^7.0",
+                "workerman/webman-framework": "^2.1 || dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "support\\": "src/support",
+                    "Webman\\Cache\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "support": {
+                "issues": "https://github.com/webman-php/cache/issues",
+                "source": "https://github.com/webman-php/cache/tree/v2.1.0"
+            },
+            "time": "2025-01-20T10:54:32+00:00"
+        },
+        {
             "name": "webman/console",
             "version": "v1.3.15",
             "source": {
@@ -3997,6 +4034,43 @@
             "time": "2025-01-07T06:44:45+00:00"
         },
         {
+            "name": "webman/database",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webman-php/database.git",
+                "reference": "453cf7beb8c606082d091fc8e89401b4a9c3919c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webman-php/database/zipball/453cf7beb8c606082d091fc8e89401b4a9c3919c",
+                "reference": "453cf7beb8c606082d091fc8e89401b4a9c3919c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^10.0 || ^11.0",
+                "laravel/serializable-closure": "^2.0",
+                "workerman/webman-framework": "^2.1 || dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "support\\": "src/support",
+                    "Webman\\Database\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Webman database",
+            "support": {
+                "issues": "https://github.com/webman-php/database/issues",
+                "source": "https://github.com/webman-php/database/tree/v2.1.0"
+            },
+            "time": "2025-02-05T12:52:15+00:00"
+        },
+        {
             "name": "webman/event",
             "version": "v1.0.5",
             "source": {
@@ -4026,6 +4100,42 @@
                 "source": "https://github.com/webman-php/event/tree/v1.0.5"
             },
             "time": "2023-12-04T09:22:12+00:00"
+        },
+        {
+            "name": "webman/redis",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webman-php/redis.git",
+                "reference": "cbee9027189ce604591b665f03d2d8bf2d78213f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webman-php/redis/zipball/cbee9027189ce604591b665f03d2d8bf2d78213f",
+                "reference": "cbee9027189ce604591b665f03d2d8bf2d78213f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/redis": "^10.0 || ^11.0",
+                "workerman/webman-framework": "^2.1 || dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "support\\": "src/support",
+                    "Webman\\Redis\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Webman redis",
+            "support": {
+                "issues": "https://github.com/webman-php/redis/issues",
+                "source": "https://github.com/webman-php/redis/tree/v2.1.0"
+            },
+            "time": "2025-01-25T00:57:28+00:00"
         },
         {
             "name": "workbunny/webman-coroutine",
@@ -4090,6 +4200,46 @@
             "time": "2024-12-20T09:17:23+00:00"
         },
         {
+            "name": "workerman/coroutine",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/workerman-php/coroutine.git",
+                "reference": "86bd7a4feec1cf3bd42e891a1721e9349c775dc5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/workerman-php/coroutine/zipball/86bd7a4feec1cf3bd42e891a1721e9349c775dc5",
+                "reference": "86bd7a4feec1cf3bd42e891a1721e9349c775dc5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "workerman/workerman": "^5.1 || dev-master"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.0",
+                "psr/log": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Workerman\\": "src",
+                    "Workerman\\Coroutine\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Workerman coroutine",
+            "support": {
+                "issues": "https://github.com/workerman-php/coroutine/issues",
+                "source": "https://github.com/workerman-php/coroutine/tree/v1.1.0"
+            },
+            "time": "2025-02-05T13:45:30+00:00"
+        },
+        {
             "name": "workerman/redis",
             "version": "v2.0.3",
             "source": {
@@ -4126,24 +4276,24 @@
         },
         {
             "name": "workerman/webman-framework",
-            "version": "v1.6.14",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/walkor/webman-framework.git",
-                "reference": "fa8bfb0d64827a79c1a46014001e8742a611e435"
+                "reference": "56dc98cf6da8dda4cfa9d5df76a4c45232c80af3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/walkor/webman-framework/zipball/fa8bfb0d64827a79c1a46014001e8742a611e435",
-                "reference": "fa8bfb0d64827a79c1a46014001e8742a611e435",
+                "url": "https://api.github.com/repos/walkor/webman-framework/zipball/56dc98cf6da8dda4cfa9d5df76a4c45232c80af3",
+                "reference": "56dc98cf6da8dda4cfa9d5df76a4c45232c80af3",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "nikic/fast-route": "^1.3",
-                "php": ">=8.0",
+                "php": ">=8.1",
                 "psr/container": ">=1.0",
-                "workerman/workerman": "^4.2.1 || ^5.0.0 || dev-master"
+                "workerman/workerman": "^5.1 || dev-master"
             },
             "suggest": {
                 "ext-event": "For better performance. "
@@ -4187,25 +4337,26 @@
                 "source": "https://github.com/walkor/webman-framework",
                 "wiki": "https://doc.workerman.net/"
             },
-            "time": "2025-01-03T09:39:52+00:00"
+            "time": "2025-02-05T12:21:01+00:00"
         },
         {
             "name": "workerman/workerman",
-            "version": "v5.0.1",
+            "version": "v5.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/walkor/workerman.git",
-                "reference": "d139ddd494ddc50263273f4f02cc18fe8534b295"
+                "reference": "5ce17bc71dfdad0e9eba8cd658342da793d2f581"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/walkor/workerman/zipball/d139ddd494ddc50263273f4f02cc18fe8534b295",
-                "reference": "d139ddd494ddc50263273f4f02cc18fe8534b295",
+                "url": "https://api.github.com/repos/walkor/workerman/zipball/5ce17bc71dfdad0e9eba8cd658342da793d2f581",
+                "reference": "5ce17bc71dfdad0e9eba8cd658342da793d2f581",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=8.1"
+                "php": ">=8.1",
+                "workerman/coroutine": "^1.1 || dev-main"
             },
             "conflict": {
                 "ext-swow": "<v1.0.0"
@@ -4262,7 +4413,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2025-01-28T01:08:08+00:00"
+            "time": "2025-02-05T14:25:44+00:00"
         }
     ],
     "packages-dev": [
