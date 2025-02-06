@@ -34,7 +34,6 @@ class IndexController
     public function index(Request $request): Response
     {
         $eventLoop = Worker::getEventLoop()::class;
-        print_r(event_loop());
         return \response(<<<HTML
             <!DOCTYPE html>
             <html lang="en">
