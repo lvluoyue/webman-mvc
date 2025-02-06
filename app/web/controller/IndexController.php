@@ -12,6 +12,7 @@ use Luoyue\WebmanMvcCore\annotation\authorization\hasRole;
 use Luoyue\WebmanMvcCore\handler\bean\SessionUserDetailsService;
 use support\Request;
 use support\Response;
+use Workerman\Worker;
 
 class IndexController
 {
@@ -32,11 +33,13 @@ class IndexController
     #[hasRole('index')]
     public function index(Request $request): Response
     {
-        return \response(<<<'HTML'
+        $eventLoop = Worker::getEventLoop()::class;
+        print_r(event_loop());
+        return \response(<<<HTML
             <!DOCTYPE html>
             <html lang="en">
             <body>
-                <h3>登录成功</h3>
+                <h3>event loop: {$eventLoop}</h3>
                 <button type="submit" onclick="location.href='/logout'">logout</button>
             </body>
             </html>

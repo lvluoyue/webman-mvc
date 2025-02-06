@@ -13,7 +13,6 @@
 
 ## 特性
 - 支持env配置（[vlucas/phpdotenv](https://github.com/vlucas/phpdotenv)）
-- 支持协程开发（[workbunny/webman-coroutine](https://github.com/workbunny/webman-coroutine)）
 - 支持注解开发（[linfly/annotation](https://github.com/imlinfly/webman-annotation)）
 - 支持验证器（[topthink/think-validate](https://github.com/top-think/think-validate)）
 - 支持依赖注入（[php-di/php-di](https://github.com/PHP-DI/PHP-DI)）

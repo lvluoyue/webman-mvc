@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a64da582fd777142aaa3c13c611e221",
+    "content-hash": "9ba08bc698aa1b92b6d67a0fb0301102",
     "packages": [
         {
             "name": "brick/math",
@@ -1374,16 +1374,16 @@
         },
         {
             "name": "luoyue/webman-mvc-core",
-            "version": "0.1.1",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lvluoyue/webman-mvc-core.git",
-                "reference": "4b72c420c00a6ff7abd8dc9192ad9e1b0ac9694e"
+                "reference": "ed8814bb38b13055071efacdab2023b07d8fa7dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lvluoyue/webman-mvc-core/zipball/4b72c420c00a6ff7abd8dc9192ad9e1b0ac9694e",
-                "reference": "4b72c420c00a6ff7abd8dc9192ad9e1b0ac9694e",
+                "url": "https://api.github.com/repos/lvluoyue/webman-mvc-core/zipball/ed8814bb38b13055071efacdab2023b07d8fa7dd",
+                "reference": "ed8814bb38b13055071efacdab2023b07d8fa7dd",
                 "shasum": ""
             },
             "require": {
@@ -1392,8 +1392,11 @@
             },
             "require-dev": {
                 "casbin/webman-permission": "^2.0",
+                "luoyue/webman-aop": "^2.0||*",
+                "webman/cache": "^2.1",
+                "webman/database": "^2.1",
                 "webman/event": "^1.0",
-                "workerman/webman-framework": "^1.6"
+                "workerman/webman-framework": "^2.1"
             },
             "type": "library",
             "autoload": {
@@ -1414,9 +1417,9 @@
             "description": "Webman plugin luoyue/webman-mvc-core",
             "support": {
                 "issues": "https://github.com/lvluoyue/webman-mvc-core/issues",
-                "source": "https://github.com/lvluoyue/webman-mvc-core/tree/0.1.1"
+                "source": "https://github.com/lvluoyue/webman-mvc-core/tree/0.1.2"
             },
-            "time": "2025-01-31T12:49:54+00:00"
+            "time": "2025-02-06T05:34:45+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -4138,79 +4141,17 @@
             "time": "2025-01-25T00:57:28+00:00"
         },
         {
-            "name": "workbunny/webman-coroutine",
-            "version": "1.3.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/workbunny/webman-coroutine.git",
-                "reference": "244996f208fa117fc12e04e41da56a4a88cbaf1c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/workbunny/webman-coroutine/zipball/244996f208fa117fc12e04e41da56a4a88cbaf1c",
-                "reference": "244996f208fa117fc12e04e41da56a4a88cbaf1c",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.0",
-                "workerman/workerman": "^4.0|^5.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.0",
-                "mockery/mockery": "^1.6",
-                "phpstan/phpstan": "^1.0",
-                "phpunit/phpunit": "^9.6",
-                "swoole/ide-helper": "^5.1",
-                "swow/swow": "^1.5",
-                "symfony/var-dumper": "^6.0",
-                "webman/console": "^1.0",
-                "workerman/webman-framework": "^1.0"
-            },
-            "suggest": {
-                "cloudtay/ripple-driver": "For supporting Ripple handler. ",
-                "ext-swoole": "For supporting Swoole handler. ",
-                "revolt/event-loop": "For supporting Revolt/PHP-fiber handler. ",
-                "swow/swow": "For supporting Swow handler. "
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Workbunny\\WebmanCoroutine\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "chaz6chez",
-                    "email": "chaz6chez1993@outlook.com",
-                    "homepage": "https://chaz6chez.cn"
-                }
-            ],
-            "description": "Webman Coroutine Infrastructure Suite Compatible with Workerman. ",
-            "support": {
-                "issues": "https://github.com/workbunny/webman-coroutine/issues",
-                "source": "https://github.com/workbunny/webman-coroutine"
-            },
-            "time": "2024-12-20T09:17:23+00:00"
-        },
-        {
             "name": "workerman/coroutine",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/workerman-php/coroutine.git",
-                "reference": "86bd7a4feec1cf3bd42e891a1721e9349c775dc5"
+                "reference": "87f2d471fc1c83ba43aa46e17d4522c7f8b5fc2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/workerman-php/coroutine/zipball/86bd7a4feec1cf3bd42e891a1721e9349c775dc5",
-                "reference": "86bd7a4feec1cf3bd42e891a1721e9349c775dc5",
+                "url": "https://api.github.com/repos/workerman-php/coroutine/zipball/87f2d471fc1c83ba43aa46e17d4522c7f8b5fc2b",
+                "reference": "87f2d471fc1c83ba43aa46e17d4522c7f8b5fc2b",
                 "shasum": ""
             },
             "require": {
@@ -4235,9 +4176,9 @@
             "description": "Workerman coroutine",
             "support": {
                 "issues": "https://github.com/workerman-php/coroutine/issues",
-                "source": "https://github.com/workerman-php/coroutine/tree/v1.1.0"
+                "source": "https://github.com/workerman-php/coroutine/tree/v1.1.1"
             },
-            "time": "2025-02-05T13:45:30+00:00"
+            "time": "2025-02-06T05:03:15+00:00"
         },
         {
             "name": "workerman/redis",

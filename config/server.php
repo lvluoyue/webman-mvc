@@ -12,7 +12,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-use function Workbunny\WebmanCoroutine\event_loop;
+require_once base_path('/app/functions.php');
 
 return [
     'event_loop' => event_loop(),

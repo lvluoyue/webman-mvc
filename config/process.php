@@ -15,24 +15,18 @@
 use support\Log;
 use support\Request;
 use app\process\Http;
-use Workerman\Worker;
-use Workbunny\WebmanCoroutine\Utils\Worker\Server;
-use function Workbunny\WebmanCoroutine\event_loop;
-
 global $argv;
 
 $listen = 'http://' . env('SERVER_APP_ADDRESS', '0.0.0.0') . ':' . env('SERVER_APP_PROT', 8080);
-$workerClass = env('SERVER_COROUTINE_WEB_ENABLE', false) ? Server::class : Worker::class;
 return [
     env('SERVER_APP_NAME', 'webman') => [
-        'workerClass' => $workerClass,
         'handler' => Http::class,
         'listen' => $listen,
         'count' => env("SERVER_APP_PROCESS", cpu_count() * 4),
         'user' => '',
         'group' => '',
         'reusePort' => true,
-        'eventLoop' => event_loop(),
+        'eventLoop' => '',
         'context' => [],
         'constructor' => [
             'requestClass' => Request::class,
