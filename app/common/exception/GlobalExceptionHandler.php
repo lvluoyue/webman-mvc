@@ -21,6 +21,15 @@ class GlobalExceptionHandler
     }
 
     /**
+     * 页面404异常.
+     */
+    #[ExceptionHandler(\support\exception\PageNotFoundException::class)]
+    public function PageNotFoundExceptionHandler(Request $request, \Throwable $exception): Response
+    {
+        return json(['code' => 404, 'message' => $exception->getMessage()]);
+    }
+
+    /**
      * 数据库查询异常.
      */
     #[ExceptionHandler(\Illuminate\Database\QueryException::class)]

@@ -2,20 +2,20 @@
 
 namespace app\common\Bean;
 
-use Casbin\WebmanPermission\Permission;
 use Luoyue\WebmanMvcCore\annotation\core\Bean;
-use Luoyue\WebmanMvcCore\handler\bean\AbstractUser;
-use Luoyue\WebmanMvcCore\handler\PermissionHandler;
 
 class UserConfig
 {
-    /*#[Bean(requireClass: PermissionHandler::class)]
-    public function permissionHandler(): PermissionHandler
+    #[Bean(requireClass: UserManager::class)]
+    public function permissionHandler(): UserManager
     {
-        $permissionHandler = new PermissionHandler();
-        $permissionHandler->addUser(new AbstractUser(2, 'xiaoxin', password_hash('123456', \PASSWORD_DEFAULT)));
+        $userManager = new UserManager();
+        $users = [
+            new User(1, 'admin', '123456', ['admin']),
+            new User(2, 'user', '123456', ['index']),
+        ];
+        $userManager->addUser(...$users);
 
-         Permission::addRoleForUser('2', 'index');
-        return $permissionHandler;
-    }*/
+        return $userManager;
+    }
 }
