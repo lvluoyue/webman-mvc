@@ -25,6 +25,7 @@
   },
   "require": {
     "php": ">=8.2",
+    "ext-pdo": "*",
     "workerman/workerman": "^v5.1",
     "workerman/webman-framework": "^2.1",
     "webman/database": "^2.1",
