@@ -19,6 +19,7 @@ use support\exception\MissingInputException;
 use Webman\App;
 use Webman\Http\Request;
 use Closure;
+use Webman\Http\UploadFile;
 
 class Http extends App
 {
@@ -233,7 +234,9 @@ class Http extends App
                         }
                         break;
                     }
-                    if (is_array($subInputs) && $constructor = (new ReflectionClass($typeName))->getConstructor()) {
+                    if ($typeName == UploadFile::class) {
+                        $parameters[$parameterName] = $request->file($parameterName);
+                    } else if (is_array($subInputs) && $constructor = (new ReflectionClass($typeName))->getConstructor()) {
                         $parameters[$parameterName] = $container->make($typeName, static::resolveMethodDependencies($container, $request, $subInputs, $constructor, $debug));
                     } else {
                         $parameters[$parameterName] = $container->make($typeName);
