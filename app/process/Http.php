@@ -18,6 +18,7 @@ use support\exception\InputValueException;
 use support\exception\MissingInputException;
 use Webman\App;
 use Webman\Http\Request;
+use Closure;
 
 class Http extends App
 {
@@ -29,6 +30,24 @@ class Http extends App
     {
         parent::onWorkerStart($worker);
         class_exists(EventParser::class) && EventParser::EventHandler();
+    }
+
+    /**
+     * ResolveInject.
+     * @param string $plugin
+     * @param array|Closure $call
+     * @param $args
+     * @return Closure
+     * @see Dependency injection through reflection information
+     */
+    protected static function resolveInject(string $plugin, $call, $args): Closure
+    {
+        return function (Request $request) use ($plugin, $call, $args) {
+            $reflector = static::getReflector($call);
+            $args = array_values(static::resolveMethodDependencies(static::container($plugin), $request,
+                array_merge($request->all(), $request->file(), $args), $reflector, static::config($plugin, 'app.debug')));
+            return $call(...$args);
+        };
     }
 
     /**
