@@ -21,10 +21,10 @@ return [
         // Connection pool, supports only Swoole or Swow drivers.
         'pool' => [
             'max_connections' => env("REDIS_POOL_MAX_CONNECTIONS", 10),
-            'min_connections' => env("REDIS_POOL_MIN_CONNECTIONS", 1),
-            'wait_timeout' => env("REDIS_POOL_WAIT_TIMEOUT", 3),
-            'idle_timeout' => env("REDIS_POOL_IDLE_TIMEOUT", 60),
-            'heartbeat_interval' => env("REDIS_POOL_HEARTBEAT_INTERVAL", 50),
+            'min_connections' => (int)env("REDIS_POOL_MIN_CONNECTIONS", 0),
+            'wait_timeout' => (float)env("REDIS_POOL_WAIT_TIMEOUT", 3),
+            'idle_timeout' => (float)env("REDIS_POOL_IDLE_TIMEOUT", 60),
+            'heartbeat_interval' => (float)env("REDIS_POOL_HEARTBEAT_INTERVAL", 50),
         ],
     ],
     'cache' => [
@@ -36,10 +36,10 @@ return [
         // Connection pool, supports only Swoole or Swow drivers.
         'pool' => [
             'max_connections' => env("CACHE_POOL_MAX_CONNECTIONS", 10),
-            'min_connections' => env("CACHE_POOL_MIN_CONNECTIONS", 1),
-            'wait_timeout' => env("CACHE_POOL_WAIT_TIMEOUT", 3),
-            'idle_timeout' => env("CACHE_POOL_IDLE_TIMEOUT", 60),
-            'heartbeat_interval' => env("CACHE_POOL_HEARTBEAT_INTERVAL", 50),
+            'min_connections' => (int)env("CACHE_POOL_MIN_CONNECTIONS", 0),
+            'wait_timeout' => (float)env("CACHE_POOL_WAIT_TIMEOUT", 3),
+            'idle_timeout' => (float)env("CACHE_POOL_IDLE_TIMEOUT", 60),
+            'heartbeat_interval' => (float)env("CACHE_POOL_HEARTBEAT_INTERVAL", 50),
         ],
     ],
 ];

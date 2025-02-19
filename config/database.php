@@ -36,10 +36,10 @@ return [
             // Connection pool, supports only Swoole or Swow drivers.
             'pool' => [
                 'max_connections' => env('DATABASE_POOL_MAX_CONNECTIONS', 5),
-                'min_connections' => env('DATABASE_POOL_MIN_CONNECTIONS', 1),
-                'wait_timeout' => env('DATABASE_POOL_WAIT_TIMEOUT', 3),
-                'idle_timeout' => env('DATABASE_POOL_IDLE_TIMEOUT', 60),
-                'heartbeat_interval' => env('DATABASE_POOL_HEARTBEAT_INTERVAL', 50),
+                'min_connections' => (int)env('DATABASE_POOL_MIN_CONNECTIONS', 0),
+                'wait_timeout' => (float)env('DATABASE_POOL_WAIT_TIMEOUT', 3),
+                'idle_timeout' => (float)env('DATABASE_POOL_IDLE_TIMEOUT', 60),
+                'heartbeat_interval' => (float)env('DATABASE_POOL_HEARTBEAT_INTERVAL', 50),
             ],
         ],
         'pgsql' => [
@@ -57,10 +57,10 @@ return [
             // Connection pool, supports only Swoole or Swow drivers.
             'pool' => [
                 'max_connections' => env('DATABASE_POOL_MAX_CONNECTIONS', 5),
-                'min_connections' => env('DATABASE_POOL_MIN_CONNECTIONS', 1),
-                'wait_timeout' => env('DATABASE_POOL_WAIT_TIMEOUT', 3),
-                'idle_timeout' => env('DATABASE_POOL_IDLE_TIMEOUT', 60),
-                'heartbeat_interval' => env('DATABASE_POOL_HEARTBEAT_INTERVAL', 50),
+                'min_connections' => (int)env('DATABASE_POOL_MIN_CONNECTIONS', 0),
+                'wait_timeout' => (float)env('DATABASE_POOL_WAIT_TIMEOUT', 3),
+                'idle_timeout' => (float)env('DATABASE_POOL_IDLE_TIMEOUT', 60),
+                'heartbeat_interval' => (float)env('DATABASE_POOL_HEARTBEAT_INTERVAL', 50),
             ],
         ],
         'sqlite' => [
@@ -70,10 +70,10 @@ return [
             // Connection pool, supports only Swoole or Swow drivers.
             'pool' => [
                 'max_connections' => env('DATABASE_POOL_MAX_CONNECTIONS', 5),
-                'min_connections' => env('DATABASE_POOL_MIN_CONNECTIONS', 1),
-                'wait_timeout' => env('DATABASE_POOL_WAIT_TIMEOUT', 3),
-                'idle_timeout' => env('DATABASE_POOL_IDLE_TIMEOUT', 60),
-                'heartbeat_interval' => env('DATABASE_POOL_HEARTBEAT_INTERVAL', 50),
+                'min_connections' => (int)env('DATABASE_POOL_MIN_CONNECTIONS', 0),
+                'wait_timeout' => (float)env('DATABASE_POOL_WAIT_TIMEOUT', 3),
+                'idle_timeout' => (float)env('DATABASE_POOL_IDLE_TIMEOUT', 60),
+                'heartbeat_interval' => (float)env('DATABASE_POOL_HEARTBEAT_INTERVAL', 50),
             ],
         ],
     ],
