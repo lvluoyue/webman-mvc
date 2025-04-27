@@ -24,16 +24,6 @@ use Webman\Http\UploadFile;
 class Http extends App
 {
     /**
-     * OnWorkerStart.
-     * @return void
-     */
-    public function onWorkerStart($worker)
-    {
-        parent::onWorkerStart($worker);
-        class_exists(EventParser::class) && EventParser::EventHandler();
-    }
-
-    /**
      * ResolveInject.
      * @param string $plugin
      * @param array|Closure $call
